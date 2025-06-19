@@ -10,13 +10,24 @@ import os
 
 from cardinity import APIError, Cardinity, CardinityError, NotFoundError
 
-# Configuration - use environment variables for production
-CONSUMER_KEY = os.getenv(
-    "CARDINITY_CONSUMER_KEY", "test_jlol6sogrlvje2zwwsfb6kjajuyy7h"
-)
-CONSUMER_SECRET = os.getenv(
-    "CARDINITY_CONSUMER_SECRET", "1h7j6rvwlpvuwbzrobo6bjbcqv1m3khnlqojpkkwh9wzbrlkmu"
-)
+# Configuration - Replace with your actual Cardinity API credentials
+# Get your credentials from: https://cardinity.com/developers
+CONSUMER_KEY = os.getenv("CARDINITY_CONSUMER_KEY", "YOUR_CONSUMER_KEY_HERE")
+CONSUMER_SECRET = os.getenv("CARDINITY_CONSUMER_SECRET", "YOUR_CONSUMER_SECRET_HERE")
+
+# Check if credentials are properly configured
+if (
+    CONSUMER_KEY == "YOUR_CONSUMER_KEY_HERE"
+    or CONSUMER_SECRET == "YOUR_CONSUMER_SECRET_HERE"
+):
+    print("❌ Please configure your Cardinity API credentials!")
+    print("\nOptions:")
+    print("1. Set environment variables:")
+    print("   export CARDINITY_CONSUMER_KEY='your_key_here'")
+    print("   export CARDINITY_CONSUMER_SECRET='your_secret_here'")
+    print("\n2. Or edit this file and replace the placeholder values")
+    print("\n3. Get your credentials from: https://cardinity.com/developers")
+    exit(1)
 
 # Initialize the Cardinity client
 cardinity = Cardinity(consumer_key=CONSUMER_KEY, consumer_secret=CONSUMER_SECRET)
