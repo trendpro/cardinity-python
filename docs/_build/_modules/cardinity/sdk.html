@@ -1,0 +1,504 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cardinity.sdk &mdash; Cardinity Python SDK v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=f9c3a110" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Cardinity Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migration from Node.js SDK</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cardinity Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cardinity.sdk</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cardinity.sdk</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Cardinity SDK Main Interface</span>
+
+<span class="sd">This module provides the main Cardinity class for interacting with the Cardinity API.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.auth</span><span class="w"> </span><span class="kn">import</span> <span class="n">CardinityAuth</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">CardinityClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FinalizePayment</span><span class="p">,</span>
+    <span class="n">GetChargeback</span><span class="p">,</span>
+    <span class="n">GetPayment</span><span class="p">,</span>
+    <span class="n">GetPaymentLink</span><span class="p">,</span>
+    <span class="n">GetRefund</span><span class="p">,</span>
+    <span class="n">GetSettlement</span><span class="p">,</span>
+    <span class="n">GetVoid</span><span class="p">,</span>
+    <span class="n">Payment</span><span class="p">,</span>
+    <span class="n">PaymentLink</span><span class="p">,</span>
+    <span class="n">RecurringPayment</span><span class="p">,</span>
+    <span class="n">Refund</span><span class="p">,</span>
+    <span class="n">Settlement</span><span class="p">,</span>
+    <span class="n">UpdatePaymentLink</span><span class="p">,</span>
+    <span class="n">Void</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="Cardinity">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Cardinity</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main Cardinity SDK class.</span>
+
+<span class="sd">    This class provides a convenient interface for all Cardinity API operations.</span>
+<span class="sd">    It handles authentication, HTTP communication, and provides methods for</span>
+<span class="sd">    all supported payment operations.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        Basic usage example::</span>
+
+<span class="sd">            cardinity = Cardinity(</span>
+<span class="sd">                consumer_key=&quot;your_consumer_key&quot;,</span>
+<span class="sd">                consumer_secret=&quot;your_consumer_secret&quot;</span>
+<span class="sd">            )</span>
+
+<span class="sd">            # Create a payment</span>
+<span class="sd">            payment = cardinity.create_payment(</span>
+<span class="sd">                amount=&quot;10.50&quot;,</span>
+<span class="sd">                currency=&quot;EUR&quot;,</span>
+<span class="sd">                description=&quot;Test payment&quot;</span>
+<span class="sd">            )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Cardinity.__init__">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">consumer_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">consumer_secret</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">base_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;https://api.cardinity.com/v1&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the Cardinity SDK.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            consumer_key: Your Cardinity consumer key</span>
+<span class="sd">            consumer_secret: Your Cardinity consumer secret</span>
+<span class="sd">            base_url: Base URL for the Cardinity API (default: production)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_auth</span> <span class="o">=</span> <span class="n">CardinityAuth</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span> <span class="n">consumer_secret</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="n">CardinityClient</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">,</span> <span class="n">base_url</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Payment Operations</span>
+
+<div class="viewcode-block" id="Cardinity.create_payment">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.create_payment">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_payment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new payment.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            **kwargs: Payment data including amount, currency, description, etc.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Payment response from the API</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValidationError: If payment data is invalid</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="n">Payment</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cardinity.get_payment">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.get_payment">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_payment</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get payment information.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            payment_id: Specific payment ID to retrieve (optional)</span>
+<span class="sd">            limit: Limit for payment listing (optional, used when payment_id is None)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Payment data or list of payments</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">get_payment</span> <span class="o">=</span> <span class="n">GetPayment</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">get_payment</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cardinity.finalize_payment">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.finalize_payment">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">finalize_payment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Finalize a payment (complete 3D Secure authentication).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            payment_id: ID of the payment to finalize</span>
+<span class="sd">            **kwargs: Finalization data (authorize_data or cres)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Finalized payment response</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValidationError: If finalization data is invalid</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">finalize</span> <span class="o">=</span> <span class="n">FinalizePayment</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">finalize</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cardinity.create_recurring_payment">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.create_recurring_payment">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_recurring_payment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a recurring payment.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            **kwargs: Recurring payment data including payment_id reference</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Recurring payment response</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValidationError: If recurring payment data is invalid</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">recurring</span> <span class="o">=</span> <span class="n">RecurringPayment</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">recurring</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Refund Operations</span>
+
+<div class="viewcode-block" id="Cardinity.create_refund">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.create_refund">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_refund</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a refund for a payment.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            payment_id: ID of the payment to refund</span>
+<span class="sd">            **kwargs: Refund data including amount and description</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Refund response</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValidationError: If refund data is invalid</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">refund</span> <span class="o">=</span> <span class="n">Refund</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">refund</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cardinity.get_refund">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.get_refund">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_refund</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">refund_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get refund information.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            payment_id: ID of the payment</span>
+<span class="sd">            refund_id: Specific refund ID (optional, lists all if None)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Refund data or list of refunds</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">get_refund</span> <span class="o">=</span> <span class="n">GetRefund</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">refund_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">get_refund</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Settlement Operations</span>
+
+<div class="viewcode-block" id="Cardinity.create_settlement">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.create_settlement">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_settlement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a settlement for a payment.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            payment_id: ID of the payment to settle</span>
+<span class="sd">            **kwargs: Settlement data including amount and description</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Settlement response</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValidationError: If settlement data is invalid</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">settlement</span> <span class="o">=</span> <span class="n">Settlement</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">settlement</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cardinity.get_settlement">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.get_settlement">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_settlement</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">settlement_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get settlement information.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            payment_id: ID of the payment</span>
+<span class="sd">            settlement_id: Specific settlement ID (optional, lists all if None)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Settlement data or list of settlements</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">get_settlement</span> <span class="o">=</span> <span class="n">GetSettlement</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">settlement_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">get_settlement</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Void Operations</span>
+
+<div class="viewcode-block" id="Cardinity.create_void">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.create_void">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_void</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a void for a payment.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            payment_id: ID of the payment to void</span>
+<span class="sd">            **kwargs: Optional void data including description</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Void response</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">void</span> <span class="o">=</span> <span class="n">Void</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">kwargs</span> <span class="k">if</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">void</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cardinity.get_void">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.get_void">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_void</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">void_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get void information.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            payment_id: ID of the payment</span>
+<span class="sd">            void_id: Specific void ID (optional, lists all if None)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Void data or list of voids</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">get_void</span> <span class="o">=</span> <span class="n">GetVoid</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">void_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">get_void</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Chargeback Operations</span>
+
+<div class="viewcode-block" id="Cardinity.get_chargeback">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.get_chargeback">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_chargeback</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">payment_id_or_limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">chargeback_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get chargeback information.</span>
+
+<span class="sd">        This method supports multiple modes:</span>
+<span class="sd">        - Global chargeback listing: get_chargeback() or get_chargeback(limit=10)</span>
+<span class="sd">        - Payment-specific chargebacks: get_chargeback(&quot;payment_id&quot;)</span>
+<span class="sd">        - Single chargeback: get_chargeback(&quot;payment_id&quot;, &quot;chargeback_id&quot;)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            payment_id_or_limit: Payment ID (str) or limit (int) for global listing</span>
+<span class="sd">            chargeback_id: Specific chargeback ID (optional)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Chargeback data or list of chargebacks</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">get_chargeback</span> <span class="o">=</span> <span class="n">GetChargeback</span><span class="p">(</span><span class="n">payment_id_or_limit</span><span class="p">,</span> <span class="n">chargeback_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">get_chargeback</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Payment Link Operations</span>
+
+<div class="viewcode-block" id="Cardinity.create_payment_link">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.create_payment_link">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_payment_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a payment link.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            **kwargs: Payment link data including amount, currency, description, etc.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Payment link response</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValidationError: If payment link data is invalid</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">payment_link</span> <span class="o">=</span> <span class="n">PaymentLink</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">payment_link</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cardinity.update_payment_link">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.update_payment_link">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_payment_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">link_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update an existing payment link.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            link_id: ID of the payment link to update</span>
+<span class="sd">            **kwargs: Update data including expiration_date and enabled status</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Updated payment link response</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValidationError: If update data is invalid</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">update_link</span> <span class="o">=</span> <span class="n">UpdatePaymentLink</span><span class="p">(</span><span class="n">link_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">update_link</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cardinity.get_payment_link">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.get_payment_link">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_payment_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">link_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get payment link information.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            link_id: ID of the payment link to retrieve</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Payment link data</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            APIError: If the API request fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">get_link</span> <span class="o">=</span> <span class="n">GetPaymentLink</span><span class="p">(</span><span class="n">link_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">get_link</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Utility Methods</span>
+
+<div class="viewcode-block" id="Cardinity.get_client">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.get_client">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_client</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CardinityClient</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the underlying HTTP client for advanced usage.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            CardinityClient: The HTTP client instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span></div>
+
+
+<div class="viewcode-block" id="Cardinity.get_auth">
+<a class="viewcode-back" href="../../api.html#cardinity.Cardinity.get_auth">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_auth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CardinityAuth</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the authentication instance.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            CardinityAuth: The authentication instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auth</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Cardinity.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

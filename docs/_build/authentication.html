@@ -1,0 +1,501 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Authentication &mdash; Cardinity Python SDK v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f9c3a110" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="examples/index.html" />
+    <link rel="prev" title="Quick Start Guide" href="quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Cardinity Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Authentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#oauth-1-0-overview">OAuth 1.0 Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-credentials">Getting Credentials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-credentials">Test Credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#live-credentials">Live Credentials</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-methods">Configuration Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#direct-initialization">Direct Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#environment-variables-recommended">Environment Variables (Recommended)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-files">Configuration Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-authentication">Advanced Authentication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#custom-http-client">Custom HTTP Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connection-pooling">Connection Pooling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#security-best-practices">Security Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#credential-storage">Credential Storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#network-security">Network Security</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging-and-monitoring">Logging and Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#authentication-errors">Authentication Errors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-authentication">Testing Authentication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#verify-credentials">Verify Credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#oauth-signature-debugging">OAuth Signature Debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-issues">Common Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#environment-specific-issues">Environment-Specific Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migration from Node.js SDK</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Cardinity Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Authentication</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/cardinity/cardinity-python/blob/main/docs/authentication.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="authentication">
+<h1>Authentication<a class="headerlink" href="#authentication" title="Link to this heading"></a></h1>
+<p>The Cardinity Python SDK uses OAuth 1.0 authentication to secure API requests. This guide explains how authentication works and how to configure it properly.</p>
+<section id="oauth-1-0-overview">
+<h2>OAuth 1.0 Overview<a class="headerlink" href="#oauth-1-0-overview" title="Link to this heading"></a></h2>
+<p>Cardinity uses OAuth 1.0 with HMAC-SHA1 signatures to authenticate API requests. This ensures that:</p>
+<ul class="simple">
+<li><p>All requests are authenticated</p></li>
+<li><p>Request data integrity is verified</p></li>
+<li><p>Sensitive credentials are never sent in plain text</p></li>
+<li><p>Replay attacks are prevented using timestamps and nonces</p></li>
+</ul>
+<p>The SDK handles all OAuth 1.0 complexity automatically - you only need to provide your consumer key and secret.</p>
+</section>
+<section id="getting-credentials">
+<h2>Getting Credentials<a class="headerlink" href="#getting-credentials" title="Link to this heading"></a></h2>
+<section id="test-credentials">
+<h3>Test Credentials<a class="headerlink" href="#test-credentials" title="Link to this heading"></a></h3>
+<p>For development and testing, use test credentials:</p>
+<ol class="arabic simple">
+<li><p>Sign up for a Cardinity account</p></li>
+<li><p>Access your dashboard</p></li>
+<li><p>Navigate to Settings → API Keys</p></li>
+<li><p>Create test credentials (prefixed with <code class="docutils literal notranslate"><span class="pre">test_</span></code>)</p></li>
+</ol>
+<p>Test credentials only work with:
+* Test card numbers
+* Sandbox API endpoints
+* No real money transactions</p>
+</section>
+<section id="live-credentials">
+<h3>Live Credentials<a class="headerlink" href="#live-credentials" title="Link to this heading"></a></h3>
+<p>For production use:</p>
+<ol class="arabic simple">
+<li><p>Complete Cardinity account verification</p></li>
+<li><p>Get approved for live transactions</p></li>
+<li><p>Generate live API credentials</p></li>
+<li><p>Use only with real card data and transactions</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Never use live credentials in development or testing environments.</p>
+</div>
+</section>
+</section>
+<section id="configuration-methods">
+<h2>Configuration Methods<a class="headerlink" href="#configuration-methods" title="Link to this heading"></a></h2>
+<section id="direct-initialization">
+<h3>Direct Initialization<a class="headerlink" href="#direct-initialization" title="Link to this heading"></a></h3>
+<p>The simplest way to configure authentication:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span>
+
+<span class="n">cardinity</span> <span class="o">=</span> <span class="n">Cardinity</span><span class="p">(</span>
+    <span class="n">consumer_key</span><span class="o">=</span><span class="s2">&quot;your_consumer_key&quot;</span><span class="p">,</span>
+    <span class="n">consumer_secret</span><span class="o">=</span><span class="s2">&quot;your_consumer_secret&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="environment-variables-recommended">
+<h3>Environment Variables (Recommended)<a class="headerlink" href="#environment-variables-recommended" title="Link to this heading"></a></h3>
+<p>For better security, use environment variables:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># In your shell or .env file</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CARDINITY_CONSUMER_KEY</span><span class="o">=</span><span class="s2">&quot;test_jlol6sogrlvje2zwwsfb6kjajuyy7h&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CARDINITY_CONSUMER_SECRET</span><span class="o">=</span><span class="s2">&quot;1h7j6rvwlpvuwbzrobo6bjbcqv1m3khnlqojpkkwh9wzbrlkmu&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span>
+
+<span class="n">cardinity</span> <span class="o">=</span> <span class="n">Cardinity</span><span class="p">(</span>
+    <span class="n">consumer_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_KEY&quot;</span><span class="p">),</span>
+    <span class="n">consumer_secret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_SECRET&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="configuration-files">
+<h3>Configuration Files<a class="headerlink" href="#configuration-files" title="Link to this heading"></a></h3>
+<p>For applications with multiple environments:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span>
+
+<span class="c1"># Load from JSON config</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;config.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">cardinity</span> <span class="o">=</span> <span class="n">Cardinity</span><span class="p">(</span>
+    <span class="n">consumer_key</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;cardinity&#39;</span><span class="p">][</span><span class="s1">&#39;key&#39;</span><span class="p">],</span>
+    <span class="n">consumer_secret</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;cardinity&#39;</span><span class="p">][</span><span class="s1">&#39;secret&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;cardinity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test_jlol6sogrlvje2zwwsfb6kjajuyy7h&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;secret&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1h7j6rvwlpvuwbzrobo6bjbcqv1m3khnlqojpkkwh9wzbrlkmu&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-authentication">
+<h2>Advanced Authentication<a class="headerlink" href="#advanced-authentication" title="Link to this heading"></a></h2>
+<section id="custom-http-client">
+<h3>Custom HTTP Client<a class="headerlink" href="#custom-http-client" title="Link to this heading"></a></h3>
+<p>For advanced use cases, you can customize the HTTP client:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">CardinityClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity.auth</span><span class="w"> </span><span class="kn">import</span> <span class="n">CardinityAuth</span>
+
+<span class="c1"># Create custom auth</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">CardinityAuth</span><span class="p">(</span>
+    <span class="n">consumer_key</span><span class="o">=</span><span class="s2">&quot;your_key&quot;</span><span class="p">,</span>
+    <span class="n">consumer_secret</span><span class="o">=</span><span class="s2">&quot;your_secret&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Create custom client</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">CardinityClient</span><span class="p">(</span><span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+
+<span class="c1"># Use client directly</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/payments&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="connection-pooling">
+<h3>Connection Pooling<a class="headerlink" href="#connection-pooling" title="Link to this heading"></a></h3>
+<p>For high-volume applications, configure connection pooling:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">requests.adapters</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPAdapter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib3.util.retry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Retry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">CardinityClient</span>
+
+<span class="c1"># Create session with connection pooling</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+
+<span class="c1"># Configure retry strategy</span>
+<span class="n">retry_strategy</span> <span class="o">=</span> <span class="n">Retry</span><span class="p">(</span>
+    <span class="n">total</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">backoff_factor</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">status_forcelist</span><span class="o">=</span><span class="p">[</span><span class="mi">429</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">502</span><span class="p">,</span> <span class="mi">503</span><span class="p">,</span> <span class="mi">504</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">adapter</span> <span class="o">=</span> <span class="n">HTTPAdapter</span><span class="p">(</span>
+    <span class="n">pool_connections</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">pool_maxsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">max_retries</span><span class="o">=</span><span class="n">retry_strategy</span>
+<span class="p">)</span>
+
+<span class="n">session</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s2">&quot;http://&quot;</span><span class="p">,</span> <span class="n">adapter</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s2">&quot;https://&quot;</span><span class="p">,</span> <span class="n">adapter</span><span class="p">)</span>
+
+<span class="c1"># Use custom session (not directly supported yet, but planned)</span>
+<span class="c1"># client = CardinityClient(session=session)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="security-best-practices">
+<h2>Security Best Practices<a class="headerlink" href="#security-best-practices" title="Link to this heading"></a></h2>
+<section id="credential-storage">
+<h3>Credential Storage<a class="headerlink" href="#credential-storage" title="Link to this heading"></a></h3>
+<p><strong>DO:</strong></p>
+<ul class="simple">
+<li><p>Store credentials in environment variables</p></li>
+<li><p>Use secure configuration management (HashiCorp Vault, AWS Secrets Manager)</p></li>
+<li><p>Rotate credentials regularly</p></li>
+<li><p>Use different credentials for different environments</p></li>
+</ul>
+<p><strong>DON’T:</strong></p>
+<ul class="simple">
+<li><p>Hardcode credentials in source code</p></li>
+<li><p>Commit credentials to version control</p></li>
+<li><p>Share credentials via email or chat</p></li>
+<li><p>Use production credentials in development</p></li>
+</ul>
+</section>
+<section id="network-security">
+<h3>Network Security<a class="headerlink" href="#network-security" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Always use HTTPS endpoints (enforced by the SDK)</p></li>
+<li><p>Validate SSL certificates (default behavior)</p></li>
+<li><p>Use secure network connections</p></li>
+<li><p>Monitor for suspicious API usage</p></li>
+</ul>
+</section>
+<section id="logging-and-monitoring">
+<h3>Logging and Monitoring<a class="headerlink" href="#logging-and-monitoring" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span><span class="p">,</span> <span class="n">APIError</span>
+
+<span class="c1"># Configure logging (be careful not to log credentials)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">cardinity</span> <span class="o">=</span> <span class="n">Cardinity</span><span class="p">(</span>
+    <span class="n">consumer_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_KEY&quot;</span><span class="p">),</span>
+    <span class="n">consumer_secret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_SECRET&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Payment created successfully: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">APIError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="c1"># Safe to log error details (no sensitive data)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Payment failed: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
+<section id="authentication-errors">
+<h3>Authentication Errors<a class="headerlink" href="#authentication-errors" title="Link to this heading"></a></h3>
+<p>Common authentication errors and solutions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span><span class="p">,</span> <span class="n">APIError</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">cardinity</span> <span class="o">=</span> <span class="n">Cardinity</span><span class="p">(</span>
+        <span class="n">consumer_key</span><span class="o">=</span><span class="s2">&quot;invalid_key&quot;</span><span class="p">,</span>
+        <span class="n">consumer_secret</span><span class="o">=</span><span class="s2">&quot;invalid_secret&quot;</span>
+    <span class="p">)</span>
+    <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">APIError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">401</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Authentication failed - check your credentials&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">e</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">403</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Access forbidden - check your account permissions&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;API error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="testing-authentication">
+<h2>Testing Authentication<a class="headerlink" href="#testing-authentication" title="Link to this heading"></a></h2>
+<section id="verify-credentials">
+<h3>Verify Credentials<a class="headerlink" href="#verify-credentials" title="Link to this heading"></a></h3>
+<p>Test your credentials before making transactions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span><span class="p">,</span> <span class="n">APIError</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">verify_credentials</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span> <span class="n">consumer_secret</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cardinity</span> <span class="o">=</span> <span class="n">Cardinity</span><span class="p">(</span>
+            <span class="n">consumer_key</span><span class="o">=</span><span class="n">consumer_key</span><span class="p">,</span>
+            <span class="n">consumer_secret</span><span class="o">=</span><span class="n">consumer_secret</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Try to list payments (minimal API call)</span>
+        <span class="n">payments</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">get_payment</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">APIError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">401</span><span class="p">,</span> <span class="mi">403</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">raise</span>  <span class="c1"># Re-raise other errors</span>
+
+<span class="c1"># Test credentials</span>
+<span class="k">if</span> <span class="n">verify_credentials</span><span class="p">(</span><span class="s2">&quot;your_key&quot;</span><span class="p">,</span> <span class="s2">&quot;your_secret&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Credentials are valid&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid credentials&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="oauth-signature-debugging">
+<h3>OAuth Signature Debugging<a class="headerlink" href="#oauth-signature-debugging" title="Link to this heading"></a></h3>
+<p>For debugging OAuth signature issues:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity.auth</span><span class="w"> </span><span class="kn">import</span> <span class="n">CardinityAuth</span>
+
+<span class="c1"># Enable OAuth debugging (for development only)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;OAUTHLIB_INSECURE_TRANSPORT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>  <span class="c1"># Only for localhost testing</span>
+
+<span class="n">auth</span> <span class="o">=</span> <span class="n">CardinityAuth</span><span class="p">(</span>
+    <span class="n">consumer_key</span><span class="o">=</span><span class="s2">&quot;your_key&quot;</span><span class="p">,</span>
+    <span class="n">consumer_secret</span><span class="o">=</span><span class="s2">&quot;your_secret&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The auth object handles OAuth signature generation</span>
+<span class="n">oauth_client</span> <span class="o">=</span> <span class="n">auth</span><span class="o">.</span><span class="n">get_auth</span><span class="p">()</span>
+
+<span class="c1"># You can inspect the OAuth client if needed</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;OAuth client: </span><span class="si">{</span><span class="n">oauth_client</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt><strong>401 Unauthorized</strong></dt><dd><ul class="simple">
+<li><p>Check consumer key and secret</p></li>
+<li><p>Verify credentials are for the correct environment (test vs live)</p></li>
+<li><p>Ensure no extra whitespace in credentials</p></li>
+</ul>
+</dd>
+<dt><strong>403 Forbidden</strong></dt><dd><ul class="simple">
+<li><p>Account may not be approved for the requested operation</p></li>
+<li><p>Check account status in dashboard</p></li>
+<li><p>Contact Cardinity support</p></li>
+</ul>
+</dd>
+<dt><strong>Signature Errors</strong></dt><dd><ul class="simple">
+<li><p>Usually caused by incorrect credentials</p></li>
+<li><p>Check for special characters in credentials</p></li>
+<li><p>Verify system clock is accurate (OAuth uses timestamps)</p></li>
+</ul>
+</dd>
+<dt><strong>SSL Certificate Errors</strong></dt><dd><ul class="simple">
+<li><p>Update system SSL certificates</p></li>
+<li><p>Check firewall settings</p></li>
+<li><p>Verify internet connectivity</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="environment-specific-issues">
+<h3>Environment-Specific Issues<a class="headerlink" href="#environment-specific-issues" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt><strong>Development</strong></dt><dd><ul class="simple">
+<li><p>Use test credentials only</p></li>
+<li><p>Test with provided test card numbers</p></li>
+<li><p>Check for proxy or firewall restrictions</p></li>
+</ul>
+</dd>
+<dt><strong>Production</strong></dt><dd><ul class="simple">
+<li><p>Use live credentials</p></li>
+<li><p>Ensure account is verified and approved</p></li>
+<li><p>Monitor for rate limiting</p></li>
+<li><p>Implement proper error handling and logging</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Learn about <a class="reference internal" href="examples/index.html"><span class="doc">Examples</span></a> for practical authentication scenarios</p></li>
+<li><p>Check the API reference for advanced client configuration</p></li>
+<li><p>Visit the GitHub repository for troubleshooting authentication issues</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quick Start Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples/index.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Cardinity.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

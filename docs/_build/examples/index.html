@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examples &mdash; Cardinity Python SDK v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f9c3a110" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Migration from Node.js SDK" href="../migration.html" />
+    <link rel="prev" title="Authentication" href="../authentication.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Cardinity Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#available-examples">Available Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quick-reference">Quick Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-test-data">Common Test Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-examples">Running Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-structure">Example Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#integration-examples">Integration Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#need-help">Need Help?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migration from Node.js SDK</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cardinity Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Examples</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/cardinity/cardinity-python/blob/main/docs/examples/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h1>
+<p>This section provides practical examples of using the Cardinity Python SDK. Each example includes complete, runnable code with explanations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All examples use test credentials and test card numbers. Replace them with your actual credentials and real data for production use.</p>
+</div>
+<section id="available-examples">
+<h2>Available Examples<a class="headerlink" href="#available-examples" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Code examples are available in the <code class="docutils literal notranslate"><span class="pre">examples/</span></code> directory of the repository.</p>
+</div>
+</section>
+<section id="quick-reference">
+<h2>Quick Reference<a class="headerlink" href="#quick-reference" title="Link to this heading"></a></h2>
+<section id="common-test-data">
+<h3>Common Test Data<a class="headerlink" href="#common-test-data" title="Link to this heading"></a></h3>
+<p>Use these test values when running examples:</p>
+<p><strong>Test Credentials:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CONSUMER_KEY</span> <span class="o">=</span> <span class="s2">&quot;test_jlol6sogrlvje2zwwsfb6kjajuyy7h&quot;</span>
+<span class="n">CONSUMER_SECRET</span> <span class="o">=</span> <span class="s2">&quot;1h7j6rvwlpvuwbzrobo6bjbcqv1m3khnlqojpkkwh9wzbrlkmu&quot;</span>
+</pre></div>
+</div>
+<p><strong>Test Card Numbers:</strong></p>
+<ul class="simple">
+<li><p><strong>Visa Success</strong>: 4111111111111111</p></li>
+<li><p><strong>MasterCard Success</strong>: 5555555555554444</p></li>
+<li><p><strong>Visa 3DS Success</strong>: 4444333322221111</p></li>
+<li><p><strong>American Express Success</strong>: 378282246310005</p></li>
+<li><p><strong>Failure (any amount &gt;150)</strong>: Any valid card number</p></li>
+</ul>
+<p><strong>Test Amounts:</strong></p>
+<ul class="simple">
+<li><p><strong>Success</strong>: Any amount &lt; 150.00</p></li>
+<li><p><strong>Failure</strong>: Any amount &gt;= 150.00</p></li>
+<li><p><strong>3DS Required</strong>: Depends on card and amount</p></li>
+</ul>
+</section>
+</section>
+<section id="running-examples">
+<h2>Running Examples<a class="headerlink" href="#running-examples" title="Link to this heading"></a></h2>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Install the SDK:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>cardinity-python
+</pre></div>
+</div>
+</li>
+<li><p>Set up environment variables (recommended):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CARDINITY_CONSUMER_KEY</span><span class="o">=</span><span class="s2">&quot;test_jlol6sogrlvje2zwwsfb6kjajuyy7h&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CARDINITY_CONSUMER_SECRET</span><span class="o">=</span><span class="s2">&quot;1h7j6rvwlpvuwbzrobo6bjbcqv1m3khnlqojpkkwh9wzbrlkmu&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Copy and run any example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>basic_payment.py
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="example-structure">
+<h3>Example Structure<a class="headerlink" href="#example-structure" title="Link to this heading"></a></h3>
+<p>Each example follows this structure:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Example: Description</span>
+
+<span class="sd">This example demonstrates how to...</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span><span class="p">,</span> <span class="n">CardinityError</span>
+
+<span class="c1"># Configuration</span>
+<span class="n">cardinity</span> <span class="o">=</span> <span class="n">Cardinity</span><span class="p">(</span>
+    <span class="n">consumer_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_KEY&quot;</span><span class="p">,</span> <span class="s2">&quot;test_key&quot;</span><span class="p">),</span>
+    <span class="n">consumer_secret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_SECRET&quot;</span><span class="p">,</span> <span class="s2">&quot;test_secret&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Example code here</span>
+        <span class="k">pass</span>
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="integration-examples">
+<h2>Integration Examples<a class="headerlink" href="#integration-examples" title="Link to this heading"></a></h2>
+<p>For real-world integration scenarios, see:</p>
+<ul class="simple">
+<li><p><strong>E-commerce Integration</strong>: Complete checkout flow</p></li>
+<li><p><strong>Subscription Billing</strong>: Recurring payment setup</p></li>
+<li><p><strong>Marketplace Payments</strong>: Multi-vendor scenarios</p></li>
+<li><p><strong>Mobile App Integration</strong>: API integration patterns</p></li>
+<li><p><strong>Webhook Handling</strong>: Processing payment notifications</p></li>
+</ul>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Start with <code class="docutils literal notranslate"><span class="pre">basic_payment.py</span></code> for simple payment processing</p></li>
+<li><p>Learn about <code class="docutils literal notranslate"><span class="pre">3ds_payment.py</span></code> for secure authentication</p></li>
+<li><p>Implement proper error handling for robust applications</p></li>
+<li><p>Explore advanced SDK features for complex scenarios</p></li>
+</ol>
+</section>
+<section id="need-help">
+<h2>Need Help?<a class="headerlink" href="#need-help" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Visit our <a class="reference external" href="https://github.com/cardinity/cardinity-python/issues">GitHub Issues</a></p></li>
+<li><p>Contact support at <a class="reference external" href="mailto:contact&#37;&#52;&#48;cardinity&#46;com">contact<span>&#64;</span>cardinity<span>&#46;</span>com</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../authentication.html" class="btn btn-neutral float-left" title="Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../migration.html" class="btn btn-neutral float-right" title="Migration from Node.js SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Cardinity.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

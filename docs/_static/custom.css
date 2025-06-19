@@ -1,0 +1,73 @@
+/* Custom styles for Cardinity Python SDK documentation */
+
+.wy-nav-content-wrap {
+    margin-left: 300px;
+}
+
+.wy-nav-side {
+    width: 300px;
+}
+
+.rst-content .section > img {
+    width: 100%;
+    height: auto;
+}
+
+.rst-content .highlight > pre {
+    line-height: 1.4;
+}
+
+/* Code block styling */
+.rst-content pre.literal-block, .rst-content div[class^='highlight'] pre, .rst-content .linenodiv pre {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Table styling */
+.rst-content table.docutils {
+    border: 1px solid #e1e4e5;
+}
+
+.rst-content table.docutils td, .rst-content table.docutils th {
+    border: 1px solid #e1e4e5;
+    padding: 8px 12px;
+}
+
+/* Note and warning boxes */
+.rst-content .note .admonition-title, .rst-content .tip .admonition-title {
+    background: #6ab0de;
+}
+
+.rst-content .warning .admonition-title, .rst-content .caution .admonition-title {
+    background: #f0b37e;
+}
+
+/* API documentation styling */
+.rst-content dl:not(.docutils) dt {
+    background: #f8f8f8;
+    border-left: 3px solid #2980b9;
+    color: #555;
+    margin-bottom: 5px;
+    padding: 6px;
+}
+
+.rst-content dl:not(.docutils) dd {
+    margin-left: 24px;
+    margin-bottom: 12px;
+}
+
+/* Class and method signatures */
+.rst-content .class > dt, .rst-content .method > dt, .rst-content .function > dt {
+    font-size: 100%;
+    font-weight: bold;
+}
+
+/* Parameter lists */
+.rst-content .field-list p {
+    margin-bottom: 0.5em;
+}
+
+/* Code examples in docstrings */
+.rst-content .docstring .highlight {
+    margin: 1em 0;
+}
