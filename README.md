@@ -3,7 +3,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/cardinity-python.svg)](https://pypi.org/project/cardinity-python/)
 [![Python versions](https://img.shields.io/pypi/pyversions/cardinity-python.svg)](https://pypi.org/project/cardinity-python/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/trendpro/cardinity-python/blob/main/LICENSE)
-[![Coverage](https://img.shields.io/badge/coverage-92%25-brightgreen.svg)](https://github.com/trendpro/cardinity-python)
+[![Coverage](https://codecov.io/gh/trendpro/cardinity-python/branch/main/graph/badge.svg)](https://codecov.io/gh/trendpro/cardinity-python)
 
 The Python SDK for the [Cardinity Payment Gateway](https://cardinity.com/). This library provides a simple and intuitive way to integrate Cardinity's payment processing capabilities into your Python applications.
 
