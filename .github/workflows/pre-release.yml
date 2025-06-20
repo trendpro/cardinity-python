@@ -18,6 +18,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Verify tag is from main branch
+      run: |
+        # Get the branch that contains the tag
+        BRANCH=$(git branch -r --contains ${{ github.ref }} | grep -E '(origin/main|origin/master)' | head -1)
+        if [ -z "$BRANCH" ]; then
+          echo "❌ Tag ${{ github.ref }} was not created from main branch"
+          echo "This workflow only runs for tags created from the main branch"
+          exit 1
+        fi
+        echo "✅ Tag ${{ github.ref }} was created from main branch"
+      if: startsWith(github.ref, 'refs/tags/')
 
     - name: Install uv
       uses: astral-sh/setup-uv@v4
@@ -133,6 +147,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Verify tag is from main branch
+      run: |
+        # Get the branch that contains the tag
+        BRANCH=$(git branch -r --contains ${{ github.ref }} | grep -E '(origin/main|origin/master)' | head -1)
+        if [ -z "$BRANCH" ]; then
+          echo "❌ Tag ${{ github.ref }} was not created from main branch"
+          echo "This workflow only runs for tags created from the main branch"
+          exit 1
+        fi
+        echo "✅ Tag ${{ github.ref }} was created from main branch"
+      if: startsWith(github.ref, 'refs/tags/')
 
     - name: Install uv
       uses: astral-sh/setup-uv@v4
