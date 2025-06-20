@@ -192,11 +192,16 @@ pytest -m performance
 
 ### Test Credentials
 
-For testing, use these Cardinity test credentials:
+To get test credentials for development and testing:
+
+1. Log in to your [Cardinity account](https://cardinity.com/)
+2. Navigate to the API settings or developer section
+3. Generate or retrieve your test/sandbox credentials
+4. Use these credentials for testing:
 
 ```python
-CONSUMER_KEY = "test_jlol6sogrlvje2zwwsfb6kjajuyy7h"
-CONSUMER_SECRET = "1h7j6rvwlpvuwbzrobo6bjbcqv1m3khnlqojpkkwh9wzbrlkmu"
+CONSUMER_KEY = "your_test_consumer_key"
+CONSUMER_SECRET = "your_test_consumer_secret"
 ```
 
 ### Test Cards
@@ -247,8 +252,8 @@ cardinity = Cardinity(
 
 ```python
 cardinity = Cardinity(
-    consumer_key="test_jlol6sogrlvje2zwwsfb6kjajuyy7h",
-    consumer_secret="1h7j6rvwlpvuwbzrobo6bjbcqv1m3khnlqojpkkwh9wzbrlkmu"
+    consumer_key="your_test_consumer_key",
+    consumer_secret="your_test_consumer_secret"
 )
 ```
 
