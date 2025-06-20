@@ -26,9 +26,9 @@ class GetPayment(ReadOnlyModel):
         """
         if payment_id is not None:
             # Single payment retrieval mode
-            self._payment_id = str(payment_id)
-            self._limit = None
-            self._is_listing = False
+            self._payment_id: Optional[str] = str(payment_id)
+            self._limit: Optional[int] = None
+            self._is_listing: bool = False
         else:
             # Payment listing mode
             self._payment_id = None
