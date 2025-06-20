@@ -1,6 +1,6 @@
 [project]
 name = "cardinity-python"
-version = "1.0.0-rc1"
+version = "1.0.0-rc2"
 description = "Python SDK for Cardinity Payment Gateway API"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -59,7 +59,7 @@ packages = ["cardinity"]
 
 [tool.ruff]
 line-length = 88
-target-version = "py38"
+target-version = "1.0.0-rc2"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "W", "UP"]
@@ -76,14 +76,14 @@ indent-style = "space"
 "tests/unit/test_performance.py" = ["F841"]  # Allow unused variables in performance tests
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "1.0.0-rc2"
 warn_return_any = false
 warn_unused_configs = true
 disallow_untyped_defs = false
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
-minversion = "6.0"
+minversion = "1.0.0-rc2"
 addopts = "-ra -q --cov=cardinity --cov-report=term-missing"
 testpaths = ["tests"]
 markers = [

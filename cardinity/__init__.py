@@ -28,7 +28,7 @@ from .validation import (
     validate_required_fields,
 )
 
-__version__ = "1.0.0-rc1"
+__version__ = "1.0.0-rc2"
 
 __all__ = [
     # Main SDK Interface
