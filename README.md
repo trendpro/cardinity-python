@@ -277,43 +277,6 @@ The SDK supports all Cardinity API operations:
 - `create_payment_link()` - Create payment links
 - `get_chargeback()` - Retrieve chargeback information
 
-## 🔄 Migration from Node.js
-
-Migrating from the Cardinity Node.js SDK? Check our [Migration Guide](docs/migration.rst) for:
-
-- Side-by-side code comparisons
-- Parameter name changes
-- Error handling differences
-- Step-by-step migration process
-
-**Quick Comparison:**
-
-```javascript
-// Node.js SDK
-const client = Cardinity({
-  consumerKey: 'key',
-  consumerSecret: 'secret'
-});
-
-client.payments.create({
-  amount: '10.00',
-  paymentInstrument: { pan: '4111111111111111' }
-});
-```
-
-```python
-# Python SDK
-client = Cardinity(
-    consumer_key='key',
-    consumer_secret='secret'
-)
-
-client.create_payment(
-    amount='10.00',
-    payment_instrument={'pan': '4111111111111111'}
-)
-```
-
 ## ⚡ Performance
 
 The SDK is optimized for performance:
@@ -381,15 +344,12 @@ We use [Semantic Versioning](https://semver.org/) for version management. For av
 
 ## 🎯 Roadmap
 
-- [ ] Webhook validation utilities
-- [ ] Advanced retry mechanisms  
-- [ ] GraphQL API support
 - [ ] Enhanced logging and debugging
 - [ ] Performance monitoring integration
 
 ## 🙏 Acknowledgments
 
-- Built with ❤️ by the Cardinity team
+- Built with ❤️ by [Kyalo Kitili](https://github.com/trendpro)
 - Inspired by the Node.js SDK
 - Thanks to all contributors and users
 
@@ -402,4 +362,4 @@ We use [Semantic Versioning](https://semver.org/) for version management. For av
 3. Install the SDK: `pip install cardinity-python`
 4. Follow the [Quick Start Guide](docs/quickstart.rst)
 
-For questions or support, don't hesitate to [contact us](mailto:contact@cardinity.com)!
+For questions or support, don't hesitate to [contact me](mailto:kyalo@trendpro.co.ke)!
