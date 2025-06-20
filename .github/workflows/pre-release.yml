@@ -86,14 +86,14 @@ jobs:
       run: |
         uv run python -c "
         import cardinity
-        import pkg_resources
+        import importlib.metadata
 
         print(f'Package version: {cardinity.__version__}')
 
-        # Check if package can be found by pkg_resources
+        # Check if package can be found by importlib.metadata
         try:
-            dist = pkg_resources.get_distribution('cardinity-python')
-            print(f'Distribution found: {dist.project_name} {dist.version}')
+            dist = importlib.metadata.distribution('cardinity-python')
+            print(f'Distribution found: {dist.metadata[\"Name\"]} {dist.version}')
         except Exception as e:
             print(f'Distribution check: {e}')
         "
