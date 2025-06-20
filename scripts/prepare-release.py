@@ -51,8 +51,9 @@ def update_pyproject_version(new_version: str):
     with open("pyproject.toml") as f:
         content = f.read()
 
-    pattern = r'version = "[^"]+"'
-    replacement = f'version = "{new_version}"'
+    # Only update the project version, not tool configuration versions
+    pattern = r'(\[project\][\s\S]*?)version = "[^"]+"'
+    replacement = f'\\1version = "{new_version}"'
 
     new_content = re.sub(pattern, replacement, content)
 

@@ -59,7 +59,7 @@ packages = ["cardinity"]
 
 [tool.ruff]
 line-length = 88
-target-version = "1.0.0-rc2"
+target-version = "py38"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "W", "UP"]
@@ -76,14 +76,14 @@ indent-style = "space"
 "tests/unit/test_performance.py" = ["F841"]  # Allow unused variables in performance tests
 
 [tool.mypy]
-python_version = "1.0.0-rc2"
+python_version = "3.8"
 warn_return_any = false
 warn_unused_configs = true
 disallow_untyped_defs = false
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
-minversion = "1.0.0-rc2"
+minversion = "6.0"
 addopts = "-ra -q --cov=cardinity --cov-report=term-missing"
 testpaths = ["tests"]
 markers = [
