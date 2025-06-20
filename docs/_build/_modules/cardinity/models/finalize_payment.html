@@ -48,6 +48,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../migration.html">Migration from Node.js SDK</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+</ul>
 
         </div>
       </div>
@@ -98,19 +102,19 @@
 
 <div class="viewcode-block" id="FinalizePayment.__init__">
 <a class="viewcode-back" href="../../../api.html#cardinity.models.finalize_payment.FinalizePayment.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize FinalizePayment model.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            payment_id: The ID of the payment to finalize</span>
-<span class="sd">            data: Finalization data containing either cres or authorize_data</span>
+<span class="sd">            **kwargs: Finalization data as keyword arguments containing either cres or authorize_data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_payment_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">payment_id</span><span class="p">)</span>
 
         <span class="c1"># Determine 3DS version based on the data provided</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_is_threedsv2</span> <span class="o">=</span> <span class="s2">&quot;cres&quot;</span> <span class="ow">in</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_threedsv2</span> <span class="o">=</span> <span class="s2">&quot;cres&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="FinalizePayment.get_constraints">

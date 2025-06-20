@@ -48,6 +48,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../migration.html">Migration from Node.js SDK</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+</ul>
 
         </div>
       </div>
@@ -181,7 +185,10 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            str: Full URL for the API endpoint</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">urljoin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">))</span>
+        <span class="c1"># Ensure base_url ends with / and endpoint starts with / for proper joining</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="n">endpoint</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">urljoin</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_parse_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">Response</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse and validate API response.</span>

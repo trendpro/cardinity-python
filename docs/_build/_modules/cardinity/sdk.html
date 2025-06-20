@@ -167,7 +167,7 @@
 <span class="sd">            ValidationError: If payment data is invalid</span>
 <span class="sd">            APIError: If the API request fails</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">payment</span> <span class="o">=</span> <span class="n">Payment</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="n">Payment</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span></div>
 
 
@@ -208,7 +208,7 @@
 <span class="sd">            ValidationError: If finalization data is invalid</span>
 <span class="sd">            APIError: If the API request fails</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">finalize</span> <span class="o">=</span> <span class="n">FinalizePayment</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">finalize</span> <span class="o">=</span> <span class="n">FinalizePayment</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">finalize</span><span class="p">)</span></div>
 
 
@@ -227,7 +227,7 @@
 <span class="sd">            ValidationError: If recurring payment data is invalid</span>
 <span class="sd">            APIError: If the API request fails</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">recurring</span> <span class="o">=</span> <span class="n">RecurringPayment</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">recurring</span> <span class="o">=</span> <span class="n">RecurringPayment</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">recurring</span><span class="p">)</span></div>
 
 
@@ -249,7 +249,7 @@
 <span class="sd">            ValidationError: If refund data is invalid</span>
 <span class="sd">            APIError: If the API request fails</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">refund</span> <span class="o">=</span> <span class="n">Refund</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">refund</span> <span class="o">=</span> <span class="n">Refund</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">refund</span><span class="p">)</span></div>
 
 
@@ -292,7 +292,7 @@
 <span class="sd">            ValidationError: If settlement data is invalid</span>
 <span class="sd">            APIError: If the API request fails</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">settlement</span> <span class="o">=</span> <span class="n">Settlement</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">settlement</span> <span class="o">=</span> <span class="n">Settlement</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">settlement</span><span class="p">)</span></div>
 
 
@@ -334,7 +334,7 @@
 <span class="sd">        Raises:</span>
 <span class="sd">            APIError: If the API request fails</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">void</span> <span class="o">=</span> <span class="n">Void</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">kwargs</span> <span class="k">if</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">void</span> <span class="o">=</span> <span class="n">Void</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="k">if</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="p">{})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">execute_request</span><span class="p">(</span><span class="n">void</span><span class="p">)</span></div>
 
 

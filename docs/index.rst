@@ -15,7 +15,7 @@ Cardinity Python SDK Documentation
    :alt: Python versions
 
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
-   :target: https://github.com/cardinity/cardinity-python/blob/main/LICENSE
+   :target: https://github.com/trendpro/cardinity-python/blob/main/LICENSE
    :alt: License
 
 Welcome to the official Python SDK for the Cardinity Payment Gateway. This library provides a simple and intuitive way to integrate Cardinity's payment processing capabilities into your Python applications.
@@ -95,14 +95,14 @@ Support
 -------
 
 * **Documentation**: You're reading it!
-* **Issues**: `GitHub Issues <https://github.com/cardinity/cardinity-python/issues>`_
+* **Issues**: `GitHub Issues <https://github.com/trendpro/cardinity-python/issues>`_
 * **Support**: contact@cardinity.com
 * **API Docs**: `Cardinity API Documentation <https://developers.cardinity.com/>`_
 
 License
 -------
 
-This project is licensed under the MIT License - see the `LICENSE <https://github.com/cardinity/cardinity-python/blob/main/LICENSE>`_ file for details.
+This project is licensed under the MIT License - see the `LICENSE <https://github.com/trendpro/cardinity-python/blob/main/LICENSE>`_ file for details.
 
 Indices and tables
 ==================

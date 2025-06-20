@@ -120,5 +120,5 @@ Next Steps
 Need Help?
 ----------
 
-* Visit our `GitHub Issues <https://github.com/cardinity/cardinity-python/issues>`_
+* Visit our `GitHub Issues <https://github.com/trendpro/cardinity-python/issues>`_
 * Contact support at contact@cardinity.com 

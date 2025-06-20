@@ -44,11 +44,11 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/cardinity/cardinity-python"
+Homepage = "https://github.com/trendpro/cardinity-python"
 Documentation = "https://developers.cardinity.com/"
-Repository = "https://github.com/cardinity/cardinity-python"
-"Bug Tracker" = "https://github.com/cardinity/cardinity-python/issues"
-Changelog = "https://github.com/cardinity/cardinity-python/blob/main/CHANGELOG.md"
+Repository = "https://github.com/trendpro/cardinity-python"
+"Bug Tracker" = "https://github.com/trendpro/cardinity-python/issues"
+Changelog = "https://github.com/trendpro/cardinity-python/blob/main/CHANGELOG.md"
 
 [build-system]
 requires = ["hatchling"]

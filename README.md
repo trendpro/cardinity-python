@@ -2,8 +2,8 @@
 
 [![PyPI version](https://img.shields.io/pypi/v/cardinity-python.svg)](https://pypi.org/project/cardinity-python/)
 [![Python versions](https://img.shields.io/pypi/pyversions/cardinity-python.svg)](https://pypi.org/project/cardinity-python/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cardinity/cardinity-python/blob/main/LICENSE)
-[![Coverage](https://img.shields.io/badge/coverage-92%25-brightgreen.svg)](https://github.com/cardinity/cardinity-python)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/trendpro/cardinity-python/blob/main/LICENSE)
+[![Coverage](https://img.shields.io/badge/coverage-92%25-brightgreen.svg)](https://github.com/trendpro/cardinity-python)
 
 The Python SDK for the [Cardinity Payment Gateway](https://cardinity.com/). This library provides a simple and intuitive way to integrate Cardinity's payment processing capabilities into your Python applications.
 
@@ -329,7 +329,7 @@ Performance benchmarks (on average hardware):
 
 ```bash
 # Clone the repository
-git clone https://github.com/cardinity/cardinity-python.git
+git clone https://github.com/trendpro/cardinity-python.git
 cd cardinity-python
 
 # Install with development dependencies
@@ -362,7 +362,7 @@ For complete API documentation, see:
 ## 🆘 Support
 
 - **Documentation**: [Read the Docs](https://cardinity-python.readthedocs.io/)
-- **Issues**: [GitHub Issues](https://github.com/cardinity/cardinity-python/issues)
+- **Issues**: [GitHub Issues](https://github.com/trendpro/cardinity-python/issues)
 - **Support**: contact@cardinity.com
 - **API Documentation**: [developers.cardinity.com](https://developers.cardinity.com/)
 
@@ -372,7 +372,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🏷️ Versioning
 
-We use [Semantic Versioning](https://semver.org/) for version management. For available versions, see the [tags on this repository](https://github.com/cardinity/cardinity-python/tags).
+We use [Semantic Versioning](https://semver.org/) for version management. For available versions, see the [tags on this repository](https://github.com/trendpro/cardinity-python/tags).
 
 ## 🎯 Roadmap
 

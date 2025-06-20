@@ -55,7 +55,7 @@ To install from source for development:
 
 .. code-block:: bash
 
-   git clone https://github.com/cardinity/cardinity-python.git
+   git clone https://github.com/trendpro/cardinity-python.git
    cd cardinity-python
    uv install --dev
 
@@ -63,7 +63,7 @@ Or with pip:
 
 .. code-block:: bash
 
-   git clone https://github.com/cardinity/cardinity-python.git
+   git clone https://github.com/trendpro/cardinity-python.git
    cd cardinity-python
    pip install -e ".[dev]"
 

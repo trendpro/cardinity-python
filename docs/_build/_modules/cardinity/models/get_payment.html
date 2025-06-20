@@ -48,6 +48,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../migration.html">Migration from Node.js SDK</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+</ul>
 
         </div>
       </div>
@@ -106,9 +110,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">payment_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># Single payment retrieval mode</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_payment_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">payment_id</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_limit</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_is_listing</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_payment_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">payment_id</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_listing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Payment listing mode</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_payment_id</span> <span class="o">=</span> <span class="kc">None</span>

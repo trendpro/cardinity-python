@@ -48,6 +48,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../migration.html">Migration from Node.js SDK</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+</ul>
 
         </div>
       </div>
@@ -573,7 +577,7 @@
                         <span class="p">},</span>
                         <span class="s2">&quot;java_enabled&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;boolean&quot;</span><span class="p">,</span> <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
                         <span class="s2">&quot;javascript_enabled&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;boolean&quot;</span><span class="p">,</span> <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-                        <span class="s2">&quot;language&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;browser_language&quot;</span><span class="p">:</span> <span class="p">{</span>
                             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
                             <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                             <span class="s2">&quot;maxlength&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
@@ -595,13 +599,18 @@
                             <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                             <span class="s2">&quot;maxlength&quot;</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
                         <span class="p">},</span>
+                        <span class="s2">&quot;challenge_window_size&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                            <span class="s2">&quot;regex&quot;</span><span class="p">:</span> <span class="sa">r</span><span class="s2">&quot;^\d+x\d+$&quot;</span><span class="p">,</span>  <span class="c1"># Format like &quot;500x600&quot;</span>
+                            <span class="s2">&quot;nullable&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="p">},</span>
+                        <span class="s2">&quot;ip_address&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                            <span class="s2">&quot;nullable&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="p">},</span>
                     <span class="p">},</span>
-                <span class="p">},</span>
-                <span class="s2">&quot;challenge_window_size&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-                    <span class="s2">&quot;allowed&quot;</span><span class="p">:</span> <span class="n">CHALLENGE_WINDOW_SIZES</span><span class="p">,</span>
-                    <span class="s2">&quot;nullable&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                 <span class="p">},</span>
             <span class="p">},</span>
         <span class="p">}</span></div>

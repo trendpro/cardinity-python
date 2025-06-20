@@ -12,7 +12,7 @@ By participating in this project, you agree to abide by our code of conduct. Ple
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/cardinity/cardinity-python.git
+   git clone https://github.com/trendpro/cardinity-python.git
    cd cardinity-python
    ```
 
