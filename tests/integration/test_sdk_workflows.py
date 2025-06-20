@@ -346,7 +346,7 @@ class TestSDKWorkflows:
                 "notification_url": "https://example.com/notify",
                 "browser_info": {
                     "accept_header": "text/html",
-                    "language": "en-US",
+                    "browser_language": "en-US",
                     "screen_height": 1080,
                     "screen_width": 1920,
                     "user_agent": "Mozilla/5.0...",

@@ -5,7 +5,7 @@ This module contains test data based on Cardinity's official testing guidelines.
 See: https://developers.cardinity.com/api/v1/?javascript#oauth-parameters
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Any, Dict
 
 
@@ -149,14 +149,16 @@ class Test3DSData:
         """Standard browser info for 3DS v2."""
         return {
             "accept_header": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "language": "en-US",
-            "screen_height": 1080,
+            "browser_language": "en-US",
+            "screen_height": 1040,
             "screen_width": 1920,
-            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-            "java_enabled": False,
-            "javascript_enabled": True,
-            "time_zone": -120,
+            "challenge_window_size": "500x600",
+            "user_agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:21.0) Gecko/20100101 Firefox/21.0",
             "color_depth": 24,
+            "time_zone": -60,
+            "ip_address": "216.58.207.35",
+            "java_enabled": True,
+            "javascript_enabled": True,
         }
 
     @staticmethod
@@ -303,8 +305,6 @@ class TestPaymentLinkData:
             "currency": "EUR",
             "description": "Test payment link",
             "country": "LT",
-            "expiration_date": (datetime.utcnow() + timedelta(days=7)).isoformat()
-            + "Z",
             "multiple_use": True,
         }
 
@@ -316,8 +316,9 @@ class TestPaymentLinkData:
             "currency": "USD",
             "description": "Single use payment link",
             "country": "US",
-            "expiration_date": (datetime.utcnow() + timedelta(days=1)).isoformat()
-            + "Z",
+            "expiration_date": (
+                datetime.now(timezone.utc) + timedelta(days=1)
+            ).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "multiple_use": False,
         }
 
@@ -326,6 +327,7 @@ class TestPaymentLinkData:
         """Data for updating payment link."""
         return {
             "enabled": False,
-            "expiration_date": (datetime.utcnow() + timedelta(days=14)).isoformat()
-            + "Z",
+            "expiration_date": (
+                datetime.now(timezone.utc) + timedelta(days=14)
+            ).strftime("%Y-%m-%dT%H:%M:%SZ"),
         }
