@@ -1,6 +1,6 @@
 [project]
 name = "cardinity-python"
-version = "1.0.0-rc4"
+version = "1.0.0"
 description = "Python SDK for Cardinity Payment Gateway API"
 readme = "README.md"
 requires-python = ">=3.8"
