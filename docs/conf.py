@@ -13,6 +13,17 @@ import sys
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath(".."))
 
+# -- Read the Docs configuration --------------------------------------------
+
+# Define the canonical URL if you are using a custom domain on Read the Docs
+html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "")
+
+# Tell Jinja2 templates the build is running on Read the Docs
+if os.environ.get("READTHEDOCS", "") == "True":
+    if "html_context" not in globals():
+        html_context = {}
+    html_context["READTHEDOCS"] = True
+
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
@@ -103,13 +114,18 @@ html_css_files = [
 ]
 
 # HTML context
-html_context = {
-    "display_github": True,
-    "github_user": "cardinity",
-    "github_repo": "cardinity-python",
-    "github_version": "main",
-    "conf_py_path": "/docs/",
-}
+if "html_context" not in globals():
+    html_context = {}
+
+html_context.update(
+    {
+        "display_github": True,
+        "github_user": "trendpro",
+        "github_repo": "cardinity-python",
+        "github_version": "main",
+        "conf_py_path": "/docs/",
+    }
+)
 
 # HTML title
 html_title = f"{project} v{version}"

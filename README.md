@@ -331,7 +331,7 @@ For complete API documentation, see:
 
 - **Documentation**: [Read the Docs](https://cardinity-python.readthedocs.io/)
 - **Issues**: [GitHub Issues](https://github.com/trendpro/cardinity-python/issues)
-- **Support**: contact@cardinity.com
+- **Support**: kyalo@trendpro.co.ke
 - **API Documentation**: [developers.cardinity.com](https://developers.cardinity.com/)
 
 ## 📄 License

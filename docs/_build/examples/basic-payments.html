@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Payment Processing &mdash; Cardinity Python SDK v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f9c3a110" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Recurring Payments" href="recurring-payments.html" />
+    <link rel="prev" title="Examples" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Cardinity Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#available-examples">Available Examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Basic Payment Processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simple-payment-example">Simple Payment Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#payment-with-authorization-vs-purchase">Payment with Authorization vs Purchase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#handling-payment-responses">Handling Payment Responses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#payment-information-retrieval">Payment Information Retrieval</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-payment-options">Advanced Payment Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test-card-numbers">Test Card Numbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#complete-workflow-example">Complete Workflow Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-issues-and-solutions">Common Issues and Solutions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#best-practices">Best Practices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="recurring-payments.html">Recurring Payments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3ds-authentication.html">3D Secure Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refunds-settlements.html">Refunds and Settlements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error-handling.html">Error Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced-features.html">Advanced Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#quick-reference">Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#basic-payment-example">Basic Payment Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#recurring-payments-example">Recurring Payments Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#d-secure-authentication-example">3D Secure Authentication Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#refund-processing-example">Refund Processing Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#error-handling-example">Error Handling Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#running-examples">Running Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#integration-patterns">Integration Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#need-help">Need Help?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../migration.html">Migration from Node.js SDK</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cardinity Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Examples</a></li>
+      <li class="breadcrumb-item active">Basic Payment Processing</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/trendpro/cardinity-python/blob/main/docs/examples/basic-payments.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="basic-payment-processing">
+<h1>Basic Payment Processing<a class="headerlink" href="#basic-payment-processing" title="Link to this heading"></a></h1>
+<p>This section covers fundamental payment processing with the Cardinity Python SDK, including creating payments, handling responses, and retrieving payment information.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>Basic payment processing involves:</p>
+<ol class="arabic simple">
+<li><p><strong>Payment Creation</strong>: Creating a new payment with card details</p></li>
+<li><p><strong>Status Handling</strong>: Processing different payment statuses (approved, declined, pending)</p></li>
+<li><p><strong>Payment Retrieval</strong>: Getting payment information after creation</p></li>
+<li><p><strong>Error Handling</strong>: Managing validation and API errors</p></li>
+</ol>
+</section>
+<section id="simple-payment-example">
+<h2>Simple Payment Example<a class="headerlink" href="#simple-payment-example" title="Link to this heading"></a></h2>
+<p>Here’s a complete example of creating a basic payment:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Basic Payment Example</span>
+
+<span class="sd">This example demonstrates the simplest way to create a payment.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span><span class="p">,</span> <span class="n">CardinityError</span>
+
+<span class="c1"># Initialize client</span>
+<span class="n">cardinity</span> <span class="o">=</span> <span class="n">Cardinity</span><span class="p">(</span>
+    <span class="n">consumer_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_KEY&quot;</span><span class="p">,</span> <span class="s2">&quot;your_consumer_key_here&quot;</span><span class="p">),</span>
+    <span class="n">consumer_secret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_SECRET&quot;</span><span class="p">,</span> <span class="s2">&quot;your_consumer_secret_here&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_simple_payment</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a basic payment.&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;10.00&quot;</span><span class="p">,</span>
+            <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Simple payment example&quot;</span><span class="p">,</span>
+            <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>  <span class="c1"># Required: Customer country (ISO 3166-1 alpha-2)</span>
+            <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>  <span class="c1"># Test Visa card</span>
+                <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+                <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Payment created successfully!&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Payment ID: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Status: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Amount: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;currency&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">payment</span>
+
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Payment failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">payment</span> <span class="o">=</span> <span class="n">create_simple_payment</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="payment-with-authorization-vs-purchase">
+<h2>Payment with Authorization vs Purchase<a class="headerlink" href="#payment-with-authorization-vs-purchase" title="Link to this heading"></a></h2>
+<p>Cardinity supports two types of payments:</p>
+<p><strong>Purchase (Default):</strong> Immediate charge and settlement</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_purchase_payment</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a purchase payment (immediate settlement).&quot;&quot;&quot;</span>
+
+    <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+        <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;25.00&quot;</span><span class="p">,</span>
+        <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Purchase payment&quot;</span><span class="p">,</span>
+        <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+        <span class="n">settle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Default: immediate settlement</span>
+        <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+            <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+            <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;Jane Smith&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">payment</span>
+</pre></div>
+</div>
+<p><strong>Authorization:</strong> Reserve funds, settle later</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_authorization_payment</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an authorization (reserve funds, settle later).&quot;&quot;&quot;</span>
+
+    <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+        <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;50.00&quot;</span><span class="p">,</span>
+        <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Authorization payment&quot;</span><span class="p">,</span>
+        <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+        <span class="n">settle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Authorization only</span>
+        <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+            <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+            <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob Johnson&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Authorization created: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Remember to settle within 7 days!&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">payment</span>
+</pre></div>
+</div>
+</section>
+<section id="handling-payment-responses">
+<h2>Handling Payment Responses<a class="headerlink" href="#handling-payment-responses" title="Link to this heading"></a></h2>
+<p>Payments can have different statuses:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">handle_payment_response</span><span class="p">(</span><span class="n">payment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle different payment response statuses.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">payment</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Payment creation failed&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">status</span> <span class="o">=</span> <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Payment approved immediately&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Transaction ID: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Amount charged: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;currency&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;declined&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Payment declined&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;error&#39;</span> <span class="ow">in</span> <span class="n">payment</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Reason: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;merchant_advice_code&#39;</span> <span class="ow">in</span> <span class="n">payment</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Advice: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;merchant_advice_code&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;pending&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⏳ Payment pending - may require 3D Secure authentication&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;threeds2_data&#39;</span> <span class="ow">in</span> <span class="n">payment</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   3DS authentication required&quot;</span><span class="p">)</span>
+            <span class="c1"># Handle 3DS flow (see 3DS documentation)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️ Unknown payment status: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="payment-information-retrieval">
+<h2>Payment Information Retrieval<a class="headerlink" href="#payment-information-retrieval" title="Link to this heading"></a></h2>
+<p>Retrieve payment details after creation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_payment_details</span><span class="p">(</span><span class="n">payment_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve comprehensive payment information.&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">get_payment</span><span class="p">(</span><span class="n">payment_id</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Payment Details for </span><span class="si">{</span><span class="n">payment_id</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Status: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Amount: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;currency&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Created: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Description: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Country: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Payment Method: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;payment_method&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Card information (masked)</span>
+        <span class="k">if</span> <span class="s1">&#39;payment_instrument&#39;</span> <span class="ow">in</span> <span class="n">payment</span><span class="p">:</span>
+            <span class="n">card</span> <span class="o">=</span> <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;payment_instrument&#39;</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Card: **** **** **** </span><span class="si">{</span><span class="n">card</span><span class="p">[</span><span class="s1">&#39;pan&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Brand: </span><span class="si">{</span><span class="n">card</span><span class="p">[</span><span class="s1">&#39;card_brand&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Holder: </span><span class="si">{</span><span class="n">card</span><span class="p">[</span><span class="s1">&#39;holder&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">payment</span>
+
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Failed to retrieve payment: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="advanced-payment-options">
+<h2>Advanced Payment Options<a class="headerlink" href="#advanced-payment-options" title="Link to this heading"></a></h2>
+<p>Using additional payment parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_advanced_payment</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a payment with additional options.&quot;&quot;&quot;</span>
+
+    <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+        <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;75.50&quot;</span><span class="p">,</span>
+        <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Advanced payment with options&quot;</span><span class="p">,</span>
+        <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+        <span class="n">order_id</span><span class="o">=</span><span class="s2">&quot;ORDER-2023-12345&quot;</span><span class="p">,</span>  <span class="c1"># Your internal order ID</span>
+        <span class="n">settle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">statement_descriptor_suffix</span><span class="o">=</span><span class="s2">&quot;MYSTORE&quot;</span><span class="p">,</span>  <span class="c1"># Appears on card statement</span>
+        <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;5555555555554444&quot;</span><span class="p">,</span>  <span class="c1"># Test MasterCard</span>
+            <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+            <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2026</span><span class="p">,</span>
+            <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;456&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice Williams&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">payment</span>
+</pre></div>
+</div>
+</section>
+<section id="test-card-numbers">
+<h2>Test Card Numbers<a class="headerlink" href="#test-card-numbers" title="Link to this heading"></a></h2>
+<p>Use these test cards for different scenarios:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test card configurations</span>
+<span class="n">TEST_CARDS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;visa_success&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+        <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;Visa Success&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;mastercard_success&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;5555555555554444&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+        <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;MasterCard Success&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;amex_success&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;378282246310005&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+        <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;1234&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;AmEx Success&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;decline_card&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+        <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;Decline Test&quot;</span>
+        <span class="c1"># Use amount &gt;= 150.00 to trigger decline</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_different_cards</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test payments with different card types.&quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">card_type</span><span class="p">,</span> <span class="n">card_data</span> <span class="ow">in</span> <span class="n">TEST_CARDS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Testing </span><span class="si">{</span><span class="n">card_type</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Use higher amount for decline test</span>
+        <span class="n">amount</span> <span class="o">=</span> <span class="s2">&quot;200.00&quot;</span> <span class="k">if</span> <span class="s2">&quot;decline&quot;</span> <span class="ow">in</span> <span class="n">card_type</span> <span class="k">else</span> <span class="s2">&quot;25.00&quot;</span>
+
+        <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+            <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Test payment with </span><span class="si">{</span><span class="n">card_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+            <span class="n">payment_instrument</span><span class="o">=</span><span class="n">card_data</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">payment</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Failed&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="complete-workflow-example">
+<h2>Complete Workflow Example<a class="headerlink" href="#complete-workflow-example" title="Link to this heading"></a></h2>
+<p>A complete payment processing workflow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">complete_payment_workflow</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate a complete payment workflow.&quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🛒 Starting payment workflow...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Step 1: Create payment</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Creating payment...&quot;</span><span class="p">)</span>
+    <span class="n">payment</span> <span class="o">=</span> <span class="n">create_simple_payment</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">payment</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Workflow failed at payment creation&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Step 2: Handle response</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. Processing payment response...&quot;</span><span class="p">)</span>
+    <span class="n">handle_payment_response</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span>
+
+    <span class="c1"># Step 3: Retrieve updated payment info</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. Retrieving payment details...&quot;</span><span class="p">)</span>
+    <span class="n">updated_payment</span> <span class="o">=</span> <span class="n">get_payment_details</span><span class="p">(</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Step 4: Final status check</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">4. Final status check...&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">updated_payment</span> <span class="ow">and</span> <span class="n">updated_payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Payment workflow completed successfully!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">updated_payment</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ Payment workflow completed with issues&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">complete_payment_workflow</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="common-issues-and-solutions">
+<h2>Common Issues and Solutions<a class="headerlink" href="#common-issues-and-solutions" title="Link to this heading"></a></h2>
+<p><strong>Invalid Card Number</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ❌ Wrong: Invalid card number</span>
+<span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+    <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;10.00&quot;</span><span class="p">,</span>
+    <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span>
+    <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+    <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567890123456&quot;</span><span class="p">,</span>  <span class="c1"># Invalid number</span>
+        <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+        <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;Test User&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># ✅ Correct: Valid test card</span>
+<span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+    <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;10.00&quot;</span><span class="p">,</span>
+    <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span>
+    <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+    <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>  <span class="c1"># Valid Visa test card</span>
+        <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+        <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;Test User&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Missing Required Fields</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ❌ Wrong: Missing country field</span>
+<span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+    <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;10.00&quot;</span><span class="p">,</span>
+    <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span>
+    <span class="c1"># country=&quot;LT&quot;,  # Required field missing</span>
+    <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># ✅ Correct: All required fields included</span>
+<span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+    <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;10.00&quot;</span><span class="p">,</span>
+    <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span>
+    <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>  <span class="c1"># Required field</span>
+    <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<p>After mastering basic payments:</p>
+<ol class="arabic simple">
+<li><p><strong>Learn 3D Secure</strong>: Handle strong customer authentication</p></li>
+<li><p><strong>Implement Recurring Payments</strong>: Set up subscription billing</p></li>
+<li><p><strong>Add Refund Processing</strong>: Handle customer refunds</p></li>
+<li><p><strong>Error Handling</strong>: Robust error management</p></li>
+<li><p><strong>Testing Strategies</strong>: Comprehensive testing approaches</p></li>
+</ol>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Always validate input data</strong> before creating payments</p></li>
+<li><p><strong>Use test credentials</strong> during development</p></li>
+<li><p><strong>Handle all possible payment statuses</strong> in your application</p></li>
+<li><p><strong>Store payment IDs</strong> for future reference and operations</p></li>
+<li><p><strong>Implement proper logging</strong> for payment tracking</p></li>
+<li><p><strong>Use HTTPS</strong> for all payment-related communications</p></li>
+<li><p><strong>Never log sensitive card data</strong> in your application</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="recurring-payments.html" class="btn btn-neutral float-right" title="Recurring Payments" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Cardinity.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

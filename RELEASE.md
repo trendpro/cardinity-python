@@ -262,20 +262,163 @@ Follow semantic versioning (semver.org):
    - Require approval for production releases
    - Limit who can create releases
 
+## Documentation
+
+### Building Documentation Locally
+
+The project uses Sphinx for documentation generation with the Read the Docs theme.
+
+#### Quick Start
+```bash
+# Build documentation
+make docs
+
+# Serve documentation locally at http://localhost:8000
+make docs-serve
+
+# View in browser
+open http://localhost:8000
+```
+
+#### Alternative Methods
+```bash
+# Direct sphinx-build command
+uv run sphinx-build docs docs/_build
+
+# Or navigate to docs directory
+cd docs && uv run make html
+
+# Manual serving
+cd docs/_build/html && python -m http.server 8000
+```
+
+#### Documentation Commands
+- `make docs` - Build HTML documentation
+- `make docs-serve` - Serve documentation locally
+- `make docs-clean` - Clean documentation build artifacts
+
+#### Documentation Dependencies
+Documentation dependencies are included in the `dev` extra:
+```bash
+# Install with documentation dependencies
+uv sync --extra dev
+```
+
+### Read the Docs Integration
+
+The project is configured for automatic documentation building on Read the Docs:
+
+#### Configuration Files
+- `.readthedocs.yaml` - Read the Docs configuration
+- `docs/conf.py` - Sphinx configuration
+- `pyproject.toml` - Python dependencies (dev extras)
+
+#### Automatic Builds
+- **Triggered by**: Git pushes to main branch and tags
+- **Build environment**: Ubuntu 22.04, Python 3.11  
+- **Output formats**: HTML, PDF, ePub
+- **URL**: https://cardinity-python.readthedocs.io/
+
+#### Read the Docs Features
+- Automatic version management
+- Multi-format output (HTML, PDF, ePub)
+- Search functionality
+- Version switching
+- GitHub integration
+
+### Documentation in Release Process
+
+Documentation is automatically updated during releases:
+
+#### Pre-Release Documentation Check
+```bash
+# Build and verify documentation
+make docs
+
+# Check for warnings or errors
+# Documentation should build without warnings
+
+# Review generated documentation
+make docs-serve
+```
+
+#### Release Documentation Steps
+1. **Version Update**: Documentation version is automatically updated from `pyproject.toml`
+2. **API Changes**: Ensure any API changes are documented
+3. **Examples**: Update examples if new features are added
+4. **Changelog**: Update CHANGELOG.md with documentation changes
+
+#### Verifying Documentation
+
+After each release, verify:
+1. **Read the Docs Build**: Check https://readthedocs.org/projects/cardinity-python/
+2. **Version Display**: Ensure new version appears in documentation
+3. **Links**: Verify internal and external links work
+4. **Examples**: Test code examples in documentation
+5. **API Reference**: Check auto-generated API documentation
+
+#### Documentation Structure
+```
+docs/
+├── _build/          # Generated documentation (local)
+├── _static/         # Static files (CSS, images)
+├── _templates/      # Custom templates
+├── api.rst          # API reference
+├── authentication.rst
+├── conf.py          # Sphinx configuration
+├── examples/
+├── index.rst        # Main documentation page
+├── installation.rst
+├── migration.rst
+└── quickstart.rst
+```
+
+#### Troubleshooting Documentation
+
+Common documentation issues:
+
+1. **Build Warnings**
+   ```bash
+   # Check for and fix warnings
+   make docs
+   # Review output for warnings
+   ```
+
+2. **Missing Dependencies**
+   ```bash
+   # Install documentation dependencies
+   uv sync --extra dev
+   ```
+
+3. **Read the Docs Build Failures**
+   - Check `.readthedocs.yaml` configuration
+   - Verify Python version compatibility
+   - Check dependency specification in `pyproject.toml`
+
+4. **API Documentation Issues**
+   - Ensure modules are importable
+   - Check docstring formatting
+   - Verify Sphinx autodoc configuration
+
 ## Post-Release Tasks
 
 1. **Update Documentation**
+   - Verify Read the Docs build completed successfully
+   - Check documentation reflects new version
    - Update API documentation if needed
    - Update example code with new features
+   - Review and update any outdated documentation
 
 2. **Communicate Release**
    - Announce on relevant channels
    - Update project README if needed
    - Close related GitHub issues
+   - Update documentation links if needed
 
 3. **Monitor**
    - Watch for installation issues
    - Monitor PyPI download statistics
+   - Monitor Read the Docs build status
    - Address any reported issues promptly
 
 ## Rollback Procedure
