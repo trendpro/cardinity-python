@@ -93,15 +93,16 @@ prepare-release: ## Prepare a new release (usage: make prepare-release VERSION=1
 
 docs: ## Build documentation
 	@echo "$(GREEN)Building documentation...$(NC)"
-	cd docs && uv run make html
+	uv run sphinx-build docs docs/_build
 
-docs-serve: ## Serve documentation locally
+docs-serve: docs ## Serve documentation locally
 	@echo "$(GREEN)Serving documentation at http://localhost:8000$(NC)"
-	cd docs/_build/html && python -m http.server 8000
+	@echo "$(GREEN)Open http://localhost:8000 in your browser$(NC)"
+	cd docs/_build && python -m http.server 8000
 
 docs-clean: ## Clean documentation build
 	@echo "$(GREEN)Cleaning documentation...$(NC)"
-	cd docs && uv run make clean
+	rm -rf docs/_build
 
 examples: ## Run all examples
 	@echo "$(GREEN)Running examples...$(NC)"
