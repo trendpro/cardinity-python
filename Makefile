@@ -98,7 +98,7 @@ docs: ## Build documentation
 docs-serve: docs ## Serve documentation locally
 	@echo "$(GREEN)Serving documentation at http://localhost:8000$(NC)"
 	@echo "$(GREEN)Open http://localhost:8000 in your browser$(NC)"
-	cd docs/_build && python -m http.server 8000
+	cd docs/_build/html && python -m http.server 8000
 
 docs-clean: ## Clean documentation build
 	@echo "$(GREEN)Cleaning documentation...$(NC)"

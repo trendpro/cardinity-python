@@ -88,12 +88,12 @@ if payment['status'] == 'pending':
 
 ## 📚 Documentation
 
-- **[Installation Guide](docs/installation.rst)** - Detailed installation instructions
-- **[Quick Start Guide](docs/quickstart.rst)** - Get started quickly
-- **[Authentication](docs/authentication.rst)** - OAuth setup and security
-- **[Examples](examples/)** - Complete code examples
-- **[API Reference](docs/api.rst)** - Full API documentation
-- **[Migration Guide](docs/migration.rst)** - Migrate from Node.js SDK
+- **[Installation Guide](https://cardinity-python.readthedocs.io/en/latest/installation.html)** - Detailed installation instructions
+- **[Quick Start Guide](https://cardinity-python.readthedocs.io/en/latest/quickstart.html)** - Get started quickly
+- **[Authentication](https://cardinity-python.readthedocs.io/en/latest/authentication.html)** - OAuth setup and security
+- **[Examples](https://cardinity-python.readthedocs.io/en/latest/examples/)** - Complete code examples
+- **[API Reference](https://cardinity-python.readthedocs.io/en/latest/api.html)** - Full API documentation
+- **[Migration Guide](https://cardinity-python.readthedocs.io/en/latest/migration.html)** - Migrate from Node.js SDK
 
 ## 💡 Examples
 
@@ -324,7 +324,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 For complete API documentation, see:
 
 - **[Online Documentation](https://cardinity-python.readthedocs.io/)**
-- **[API Reference](docs/api.rst)**
+- **[API Reference](https://cardinity-python.readthedocs.io/en/latest/api.html)**
 - **[Cardinity API Docs](https://developers.cardinity.com/)**
 
 ## 🆘 Support
@@ -360,6 +360,6 @@ We use [Semantic Versioning](https://semver.org/) for version management. For av
 1. [Sign up for a Cardinity account](https://cardinity.com/)
 2. Get your API credentials
 3. Install the SDK: `pip install cardinity-python`
-4. Follow the [Quick Start Guide](docs/quickstart.rst)
+4. Follow the [Quick Start Guide](https://cardinity-python.readthedocs.io/en/latest/quickstart.html)
 
 For questions or support, don't hesitate to [contact me](mailto:kyalo@trendpro.co.ke)!

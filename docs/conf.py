@@ -30,8 +30,8 @@ if os.environ.get("READTHEDOCS", "") == "True":
 project = "Cardinity Python SDK"
 copyright = "2024, Cardinity"
 author = "Cardinity"
-release = "1.0.0"
-version = "1.0.0"
+release = "1.0.1"
+version = "1.0.1"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
