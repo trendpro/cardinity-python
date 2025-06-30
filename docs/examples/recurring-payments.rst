@@ -14,7 +14,7 @@ Recurring payments enable you to:
 4. **Flexible Billing**: Support various billing cycles and amounts
 
 How Recurring Payments Work
---------------------------
+----------------------------
 
 The recurring payment process involves:
 
@@ -104,7 +104,7 @@ Here's how to set up recurring payments:
            return None
 
 Subscription Workflow Example
-----------------------------
+------------------------------
 
 Complete subscription billing workflow:
 
@@ -174,7 +174,7 @@ Complete subscription billing workflow:
        }
 
 Variable Amount Recurring Payments
----------------------------------
+-----------------------------------
 
 Handle usage-based billing with variable amounts:
 
@@ -263,7 +263,7 @@ Handle common recurring payment issues:
        return None
 
 Subscription Management Class
-----------------------------
+------------------------------
 
 A complete subscription management implementation:
 
@@ -384,7 +384,7 @@ A complete subscription management implementation:
            manager.cancel_subscription("CUST-001")
 
 Best Practices for Recurring Payments
-------------------------------------
+--------------------------------------
 
 .. code-block:: python
 
@@ -456,7 +456,7 @@ Best Practices for Recurring Payments
            return payment
 
 Common Recurring Payment Scenarios
----------------------------------
+-----------------------------------
 
 Different types of recurring billing:
 
@@ -568,7 +568,7 @@ Test your recurring payment implementation:
            print("   ✅ Correctly handled invalid payment ID")
 
 Production Considerations
------------------------
+-------------------------
 
 Important considerations for production use:
 

@@ -16,7 +16,7 @@ Effective error handling includes:
 6. **Logging**: Proper error logging and monitoring
 
 Exception Types
---------------
+---------------
 
 The Cardinity SDK provides several exception types:
 
@@ -139,7 +139,7 @@ The Cardinity SDK provides several exception types:
            print("   Too many requests - implement backoff strategy")
 
 Comprehensive Error Handling
----------------------------
+-----------------------------
 
 Robust error handling for payment operations:
 
@@ -261,7 +261,7 @@ Robust error handling for payment operations:
        }
 
 Payment-Specific Error Handling
-------------------------------
+--------------------------------
 
 Handle payment-specific error scenarios:
 
@@ -356,7 +356,7 @@ Handle payment-specific error scenarios:
                }
 
 Circuit Breaker Pattern
-----------------------
+-----------------------
 
 Implement circuit breaker pattern for API resilience:
 
@@ -433,7 +433,7 @@ Implement circuit breaker pattern for API resilience:
            raise
 
 Error Logging and Monitoring
----------------------------
+-----------------------------
 
 Implement comprehensive error logging:
 
@@ -538,7 +538,7 @@ Implement comprehensive error logging:
        return result
 
 Graceful Degradation
--------------------
+--------------------
 
 Implement graceful degradation for service failures:
 
@@ -599,7 +599,7 @@ Implement graceful degradation for service failures:
    payment_service = PaymentServiceManager()
 
 Webhook Error Handling
----------------------
+----------------------
 
 Handle webhook-related errors:
 
@@ -722,7 +722,7 @@ Test error handling thoroughly:
                print(f"   ❌ Expected failure but got success")
 
 Best Practices Summary
----------------------
+----------------------
 
 .. code-block:: python
 
@@ -787,7 +787,7 @@ Best Practices Summary
                print(f"  • {practice}")
 
 Production Error Monitoring
---------------------------
+----------------------------
 
 Set up production error monitoring:
 

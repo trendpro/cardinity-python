@@ -153,7 +153,7 @@ Here's a complete example of 3D Secure authentication:
            return None
 
 3DS2 Browser Information
------------------------
+-------------------------
 
 Comprehensive browser information for 3DS2:
 
@@ -274,7 +274,7 @@ Different 3DS outcomes and how to handle them:
                        print(f"   Final Status: {finalized['status']}")
 
 Web Integration Example
-----------------------
+------------------------
 
 Complete web application integration:
 
@@ -402,7 +402,7 @@ Complete web application integration:
        return '', 200
 
 Mobile App Integration
----------------------
+-----------------------
 
 3DS integration for mobile applications:
 
@@ -652,7 +652,7 @@ Test different 3DS scenarios:
                print(f"   ❌ Test failed: {result.get('error')}")
 
 Best Practices for 3DS
-----------------------
+-----------------------
 
 .. code-block:: python
 
@@ -727,7 +727,7 @@ Best Practices for 3DS
            return ux_tips
 
 Production Considerations
------------------------
+-------------------------
 
 Important considerations for production 3DS implementation:
 
@@ -740,6 +740,7 @@ Important considerations for production 3DS implementation:
 7. **Monitoring**: Track 3DS success/failure rates
 8. **Compliance**: Ensure PSD2 and SCA compliance
 
+
 Next Steps
 ----------
 
@@ -751,4 +752,5 @@ After implementing 3DS authentication:
 4. **Fallback Strategies**: Handle 3DS failures gracefully
 5. **Mobile Optimization**: Optimize for mobile 3DS flows
 6. **Testing**: Comprehensive testing across browsers and devices
+
 </rewritten_file> 

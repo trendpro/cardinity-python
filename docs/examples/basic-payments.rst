@@ -1,5 +1,5 @@
 Basic Payment Processing
-=======================
+========================
 
 This section covers fundamental payment processing with the Cardinity Python SDK, including creating payments, handling responses, and retrieving payment information.
 
@@ -14,7 +14,7 @@ Basic payment processing involves:
 4. **Error Handling**: Managing validation and API errors
 
 Simple Payment Example
----------------------
+-----------------------
 
 Here's a complete example of creating a basic payment:
 
@@ -68,7 +68,7 @@ Here's a complete example of creating a basic payment:
        payment = create_simple_payment()
 
 Payment with Authorization vs Purchase
--------------------------------------
+---------------------------------------
 
 Cardinity supports two types of payments:
 
@@ -124,7 +124,7 @@ Cardinity supports two types of payments:
        return payment
 
 Handling Payment Responses
--------------------------
+--------------------------
 
 Payments can have different statuses:
 
@@ -161,7 +161,7 @@ Payments can have different statuses:
            print(f"⚠️ Unknown payment status: {status}")
 
 Payment Information Retrieval
-----------------------------
+------------------------------
 
 Retrieve payment details after creation:
 
@@ -195,7 +195,7 @@ Retrieve payment details after creation:
            return None
 
 Advanced Payment Options
------------------------
+------------------------
 
 Using additional payment parameters:
 
@@ -224,7 +224,7 @@ Using additional payment parameters:
        return payment
 
 Test Card Numbers
-----------------
+-----------------
 
 Use these test cards for different scenarios:
 
@@ -283,7 +283,7 @@ Use these test cards for different scenarios:
            print(f"Result: {payment['status'] if payment else 'Failed'}")
 
 Complete Workflow Example
-------------------------
+--------------------------
 
 A complete payment processing workflow:
 
@@ -323,7 +323,7 @@ A complete payment processing workflow:
        result = complete_payment_workflow()
 
 Common Issues and Solutions
---------------------------
+---------------------------
 
 **Invalid Card Number**
 

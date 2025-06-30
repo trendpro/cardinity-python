@@ -77,7 +77,7 @@ Setting Up Your Environment
       )
 
 Basic Payment Example
---------------------
+----------------------
 
 Here's a simple payment processing example:
 
@@ -130,7 +130,7 @@ Here's a simple payment processing example:
    payment = create_basic_payment()
 
 Recurring Payments Example
--------------------------
+---------------------------
 
 Subscription-style recurring payments:
 
@@ -258,7 +258,7 @@ Handling 3D Secure v2 authentication:
    final_payment = handle_3ds_flow(payment)
 
 Refund Processing Example
-------------------------
+--------------------------
 
 Processing full and partial refunds:
 
@@ -314,7 +314,7 @@ Processing full and partial refunds:
        )
 
 Error Handling Example
----------------------
+-----------------------
 
 Comprehensive error handling:
 

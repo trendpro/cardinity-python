@@ -15,7 +15,7 @@ Refund and settlement operations include:
 5. **Void Operations**: Cancel unsettled authorizations
 
 Basic Refund Processing
-----------------------
+------------------------
 
 Here's how to process refunds:
 
@@ -169,7 +169,7 @@ Handle multiple partial refunds for a single payment:
        return successful_refunds
 
 Refund Status Management
------------------------
+------------------------
 
 Handle different refund statuses:
 
@@ -326,7 +326,7 @@ Real-world e-commerce refund examples:
                return None
 
 Settlement Operations
---------------------
+---------------------
 
 Handle authorization settlements:
 
@@ -431,7 +431,7 @@ Handle authorization settlements:
            print(f"   Total Settled: {float(settlement1['amount']) + float(settlement2['amount'])} EUR")
 
 Void Operations
---------------
+---------------
 
 Cancel unsettled authorizations:
 
@@ -508,7 +508,7 @@ Cancel unsettled authorizations:
                print("❌ Void failed")
 
 Advanced Refund Management
--------------------------
+---------------------------
 
 Advanced refund scenarios with business logic:
 
@@ -786,7 +786,7 @@ Best Practices
            print(f"• {practice['practice']}: {practice['example']}")
 
 Production Considerations
------------------------
+-------------------------
 
 Important considerations for production use:
 
