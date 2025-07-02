@@ -1,7 +1,7 @@
 # Cardinity Python SDK Makefile
 # Provides convenient commands for development and release
 
-.PHONY: help install test lint format type-check build clean validate-release prepare-release
+.PHONY: help install test lint format type-check build clean validate-release prepare-release docs docs-serve docs-serve-bg docs-stop docs-clean
 .DEFAULT_GOAL := help
 
 # Colors for pretty output
@@ -98,7 +98,18 @@ docs: ## Build documentation
 docs-serve: docs ## Serve documentation locally
 	@echo "$(GREEN)Serving documentation at http://localhost:8000$(NC)"
 	@echo "$(GREEN)Open http://localhost:8000 in your browser$(NC)"
-	cd docs/_build/html && python -m http.server 8000
+	cd docs/_build && python -m http.server 8000
+
+docs-serve-bg: docs ## Serve documentation in background
+	@echo "$(GREEN)Starting documentation server in background...$(NC)"
+	@cd docs/_build && python -m http.server 8000 > /dev/null 2>&1 &
+	@sleep 1
+	@echo "$(GREEN)✅ Documentation server running at http://localhost:8000$(NC)"
+	@echo "$(YELLOW)To stop: make docs-stop$(NC)"
+
+docs-stop: ## Stop documentation server
+	@echo "$(GREEN)Stopping documentation server...$(NC)"
+	@pkill -f "python.*http.server" 2>/dev/null || echo "$(YELLOW)No server was running$(NC)"
 
 docs-clean: ## Clean documentation build
 	@echo "$(GREEN)Cleaning documentation...$(NC)"

@@ -296,7 +296,6 @@ uv run python -m http.server 8000 --directory docs/_build
 - **Quick Start:** Basic usage examples
 - **API Reference:** Complete API documentation
 - **Examples:** Comprehensive usage examples
-- **Migration Guide:** Node.js to Python migration
 - **Contributing:** This document
 
 ## Release Process
@@ -360,7 +359,7 @@ When requesting features, please include:
 
 - **Issues:** Use GitHub issues for bugs and feature requests
 - **Discussions:** Use GitHub discussions for questions
-- **Email:** Contact support at support@cardinity.com
+- **Email:** Contact support at kyalo@trendpro.co.ke
 
 ## License
 

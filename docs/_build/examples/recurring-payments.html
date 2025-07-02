@@ -1,0 +1,800 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recurring Payments &mdash; Cardinity Python SDK v1.0.1</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f9c3a110" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3D Secure Authentication" href="3ds-authentication.html" />
+    <link rel="prev" title="Basic Payment Processing" href="basic-payments.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Cardinity Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#available-examples">Available Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="basic-payments.html">Basic Payment Processing</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Recurring Payments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-recurring-payments-work">How Recurring Payments Work</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basic-recurring-payment-setup">Basic Recurring Payment Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#subscription-workflow-example">Subscription Workflow Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#variable-amount-recurring-payments">Variable Amount Recurring Payments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recurring-payment-error-handling">Recurring Payment Error Handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#subscription-management-class">Subscription Management Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#best-practices-for-recurring-payments">Best Practices for Recurring Payments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-recurring-payment-scenarios">Common Recurring Payment Scenarios</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-recurring-payments">Testing Recurring Payments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#production-considerations">Production Considerations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#security-best-practices">Security Best Practices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="3ds-authentication.html">3D Secure Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refunds-settlements.html">Refunds and Settlements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error-handling.html">Error Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced-features.html">Advanced Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#quick-reference">Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#basic-payment-example">Basic Payment Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#recurring-payments-example">Recurring Payments Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#d-secure-authentication-example">3D Secure Authentication Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#refund-processing-example">Refund Processing Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#error-handling-example">Error Handling Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#running-examples">Running Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#integration-patterns">Integration Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#need-help">Need Help?</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cardinity Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Examples</a></li>
+      <li class="breadcrumb-item active">Recurring Payments</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/trendpro/cardinity-python/blob/main/docs/examples/recurring-payments.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="recurring-payments">
+<h1>Recurring Payments<a class="headerlink" href="#recurring-payments" title="Link to this heading"></a></h1>
+<p>This section covers recurring payment processing with the Cardinity Python SDK, including subscription billing, automatic payments, and recurring payment management.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>Recurring payments enable you to:</p>
+<ol class="arabic simple">
+<li><p><strong>Subscription Billing</strong>: Charge customers periodically for services</p></li>
+<li><p><strong>Automatic Payments</strong>: Process payments without customer intervention</p></li>
+<li><p><strong>Card Tokenization</strong>: Securely store payment methods for future use</p></li>
+<li><p><strong>Flexible Billing</strong>: Support various billing cycles and amounts</p></li>
+</ol>
+</section>
+<section id="how-recurring-payments-work">
+<h2>How Recurring Payments Work<a class="headerlink" href="#how-recurring-payments-work" title="Link to this heading"></a></h2>
+<p>The recurring payment process involves:</p>
+<ol class="arabic simple">
+<li><p><strong>Initial Payment</strong>: Customer provides card details for the first payment</p></li>
+<li><p><strong>Card Tokenization</strong>: Cardinity securely stores the payment method</p></li>
+<li><p><strong>Recurring Charges</strong>: Use the initial payment ID to create subsequent payments</p></li>
+<li><p><strong>No 3DS Required</strong>: Recurring payments bypass 3D Secure authentication</p></li>
+</ol>
+</section>
+<section id="basic-recurring-payment-setup">
+<h2>Basic Recurring Payment Setup<a class="headerlink" href="#basic-recurring-payment-setup" title="Link to this heading"></a></h2>
+<p>Here’s how to set up recurring payments:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Recurring Payment Setup Example</span>
+
+<span class="sd">This example shows how to set up and process recurring payments.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span><span class="p">,</span> <span class="n">CardinityError</span>
+
+<span class="c1"># Initialize client</span>
+<span class="n">cardinity</span> <span class="o">=</span> <span class="n">Cardinity</span><span class="p">(</span>
+    <span class="n">consumer_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_KEY&quot;</span><span class="p">,</span> <span class="s2">&quot;your_consumer_key_here&quot;</span><span class="p">),</span>
+    <span class="n">consumer_secret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_SECRET&quot;</span><span class="p">,</span> <span class="s2">&quot;your_consumer_secret_here&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_initial_payment</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the initial payment that enables recurring billing.&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Create initial payment - this will be used for future recurring payments</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;29.99&quot;</span><span class="p">,</span>
+            <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Monthly subscription - Initial payment&quot;</span><span class="p">,</span>
+            <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+            <span class="n">order_id</span><span class="o">=</span><span class="s2">&quot;SUBSCRIPTION-001-INITIAL&quot;</span><span class="p">,</span>
+            <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>  <span class="c1"># Test Visa card</span>
+                <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+                <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Initial payment created!&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Payment ID: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Status: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Amount: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;currency&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">payment</span>
+
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Initial payment failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_recurring_payment</span><span class="p">(</span><span class="n">parent_payment_id</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;29.99&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a recurring payment using a parent payment ID.&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Monthly subscription payment - $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">recurring_payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_recurring_payment</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+            <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+            <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>  <span class="c1"># Required field</span>
+            <span class="n">order_id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;SUBSCRIPTION-</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="c1"># Optional but recommended</span>
+            <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;payment_id&quot;</span><span class="p">:</span> <span class="n">parent_payment_id</span>  <span class="c1"># Reference to initial payment</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Recurring payment created!&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Payment ID: </span><span class="si">{</span><span class="n">recurring_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Status: </span><span class="si">{</span><span class="n">recurring_payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Amount: </span><span class="si">{</span><span class="n">recurring_payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">recurring_payment</span><span class="p">[</span><span class="s1">&#39;currency&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Parent Payment: </span><span class="si">{</span><span class="n">parent_payment_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">recurring_payment</span>
+
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Recurring payment failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="subscription-workflow-example">
+<h2>Subscription Workflow Example<a class="headerlink" href="#subscription-workflow-example" title="Link to this heading"></a></h2>
+<p>Complete subscription billing workflow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">subscription_billing_workflow</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate a complete subscription billing workflow.&quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;💳 Starting subscription billing workflow...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Step 1: Customer signs up - create initial payment</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Customer signup - Creating initial payment...&quot;</span><span class="p">)</span>
+    <span class="n">initial_payment</span> <span class="o">=</span> <span class="n">create_initial_payment</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">initial_payment</span> <span class="ow">or</span> <span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Initial payment failed. Cannot setup subscription.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Subscription activated!&quot;</span><span class="p">)</span>
+    <span class="n">subscription_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;customer_id&#39;</span><span class="p">:</span> <span class="s1">&#39;CUST-12345&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;payment_id&#39;</span><span class="p">:</span> <span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;plan&#39;</span><span class="p">:</span> <span class="s1">&#39;monthly&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="s1">&#39;29.99&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;created&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Step 2: Process monthly recurring payments</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. Processing monthly recurring payments...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Month 1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   📅 Processing Month 1 payment...&quot;</span><span class="p">)</span>
+    <span class="n">month1_payment</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span>
+        <span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+        <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;29.99&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Monthly subscription - Month 1&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Simulate time passing</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Month 2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   📅 Processing Month 2 payment...&quot;</span><span class="p">)</span>
+    <span class="n">month2_payment</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span>
+        <span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+        <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;29.99&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Monthly subscription - Month 2&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Step 3: Handle plan upgrade</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. Customer upgrades to premium plan...&quot;</span><span class="p">)</span>
+    <span class="n">premium_payment</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span>
+        <span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+        <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;49.99&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Premium subscription - Upgraded plan&quot;</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ Subscription workflow completed!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;initial&#39;</span><span class="p">:</span> <span class="n">initial_payment</span><span class="p">,</span>
+        <span class="s1">&#39;month1&#39;</span><span class="p">:</span> <span class="n">month1_payment</span><span class="p">,</span>
+        <span class="s1">&#39;month2&#39;</span><span class="p">:</span> <span class="n">month2_payment</span><span class="p">,</span>
+        <span class="s1">&#39;premium&#39;</span><span class="p">:</span> <span class="n">premium_payment</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="variable-amount-recurring-payments">
+<h2>Variable Amount Recurring Payments<a class="headerlink" href="#variable-amount-recurring-payments" title="Link to this heading"></a></h2>
+<p>Handle usage-based billing with variable amounts:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">usage_based_billing_example</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example of usage-based recurring billing with variable amounts.&quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;📊 Usage-based billing example...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create initial payment for usage-based billing</span>
+    <span class="n">initial_payment</span> <span class="o">=</span> <span class="n">create_initial_payment</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">initial_payment</span> <span class="ow">or</span> <span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Define different usage scenarios</span>
+    <span class="n">usage_scenarios</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;usage&quot;</span><span class="p">:</span> <span class="s2">&quot;low&quot;</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;15.99&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Low usage month - 100GB&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;usage&quot;</span><span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;25.99&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Medium usage month - 500GB&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;usage&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;45.99&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;High usage month - 1TB&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;usage&quot;</span><span class="p">:</span> <span class="s2">&quot;enterprise&quot;</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;89.99&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Enterprise usage - 5TB&quot;</span><span class="p">}</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">scenario</span> <span class="ow">in</span> <span class="n">usage_scenarios</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   💰 Processing </span><span class="si">{</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;usage&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> usage billing...&quot;</span><span class="p">)</span>
+
+        <span class="n">payment</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span>
+            <span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+            <span class="n">amount</span><span class="o">=</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">],</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">payment</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      ✅ Charged </span><span class="si">{</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> EUR for </span><span class="si">{</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;usage&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> usage&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="recurring-payment-error-handling">
+<h2>Recurring Payment Error Handling<a class="headerlink" href="#recurring-payment-error-handling" title="Link to this heading"></a></h2>
+<p>Handle common recurring payment issues:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIError</span><span class="p">,</span> <span class="n">ValidationError</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">robust_recurring_payment</span><span class="p">(</span><span class="n">parent_payment_id</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create recurring payment with robust error handling.&quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_retries</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_recurring_payment</span><span class="p">(</span>
+                <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+                <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+                <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+                <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;payment_id&quot;</span><span class="p">:</span> <span class="n">parent_payment_id</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Recurring payment successful on attempt </span><span class="si">{</span><span class="n">attempt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">payment</span>
+            <span class="k">elif</span> <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;declined&#39;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Payment declined: </span><span class="si">{</span><span class="n">payment</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Unknown reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="c1"># Handle declined payment (notify customer, update subscription, etc.)</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Validation error on attempt </span><span class="si">{</span><span class="n">attempt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">attempt</span> <span class="o">==</span> <span class="n">max_retries</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Max retries reached. Payment failed.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">except</span> <span class="n">APIError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️ API error on attempt </span><span class="si">{</span><span class="n">attempt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">attempt</span> <span class="o">&lt;</span> <span class="n">max_retries</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Retrying in 2 seconds...&quot;</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Max retries reached. Payment failed.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Cardinity error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="subscription-management-class">
+<h2>Subscription Management Class<a class="headerlink" href="#subscription-management-class" title="Link to this heading"></a></h2>
+<p>A complete subscription management implementation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SubscriptionManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manage customer subscriptions and recurring payments.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cardinity_client</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cardinity</span> <span class="o">=</span> <span class="n">cardinity_client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subscriptions</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># In production, use a database</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_subscription</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">plan_amount</span><span class="p">,</span> <span class="n">plan_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new subscription for a customer.&quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating subscription for customer </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Create initial payment</span>
+        <span class="n">initial_payment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="n">plan_amount</span><span class="p">,</span>
+            <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">plan_name</span><span class="si">}</span><span class="s2"> - Initial payment&quot;</span><span class="p">,</span>
+            <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+            <span class="n">order_id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;SUB-</span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2">-INIT&quot;</span><span class="p">,</span>
+            <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+                <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;Subscription Customer&quot;</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">initial_payment</span> <span class="ow">and</span> <span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+            <span class="n">subscription</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;customer_id&#39;</span><span class="p">:</span> <span class="n">customer_id</span><span class="p">,</span>
+                <span class="s1">&#39;payment_id&#39;</span><span class="p">:</span> <span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;plan_name&#39;</span><span class="p">:</span> <span class="n">plan_name</span><span class="p">,</span>
+                <span class="s1">&#39;plan_amount&#39;</span><span class="p">:</span> <span class="n">plan_amount</span><span class="p">,</span>
+                <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;active&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;created&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+                <span class="s1">&#39;next_billing&#39;</span><span class="p">:</span> <span class="kc">None</span>
+            <span class="p">}</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">subscriptions</span><span class="p">[</span><span class="n">customer_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">subscription</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Subscription created for </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">subscription</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Failed to create subscription for </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_recurring_payment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process a recurring payment for a customer.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">customer_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subscriptions</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ No subscription found for customer </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">subscription</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subscriptions</span><span class="p">[</span><span class="n">customer_id</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">subscription</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;active&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Subscription for </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2"> is not active&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Use subscription amount if no amount specified</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">amount</span> <span class="o">=</span> <span class="n">subscription</span><span class="p">[</span><span class="s1">&#39;plan_amount&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subscription</span><span class="p">[</span><span class="s1">&#39;plan_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - Recurring payment&quot;</span>
+
+        <span class="n">payment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinity</span><span class="o">.</span><span class="n">create_recurring_payment</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+            <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+            <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+            <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;payment_id&quot;</span><span class="p">:</span> <span class="n">subscription</span><span class="p">[</span><span class="s1">&#39;payment_id&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">payment</span> <span class="ow">and</span> <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Recurring payment processed for </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">payment</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Recurring payment failed for </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1"># In production, handle failed payments (retry, suspend, notify)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">cancel_subscription</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Cancel a customer&#39;s subscription.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">customer_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subscriptions</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subscriptions</span><span class="p">[</span><span class="n">customer_id</span><span class="p">][</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cancelled&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Subscription cancelled for </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ No subscription found for </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+<span class="c1"># Usage example</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">subscription_manager_example</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate the subscription manager.&quot;&quot;&quot;</span>
+
+    <span class="n">manager</span> <span class="o">=</span> <span class="n">SubscriptionManager</span><span class="p">(</span><span class="n">cardinity</span><span class="p">)</span>
+
+    <span class="c1"># Create subscription</span>
+    <span class="n">subscription</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span>
+        <span class="n">customer_id</span><span class="o">=</span><span class="s2">&quot;CUST-001&quot;</span><span class="p">,</span>
+        <span class="n">plan_amount</span><span class="o">=</span><span class="s2">&quot;29.99&quot;</span><span class="p">,</span>
+        <span class="n">plan_name</span><span class="o">=</span><span class="s2">&quot;Premium Plan&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">subscription</span><span class="p">:</span>
+        <span class="c1"># Process recurring payments</span>
+        <span class="n">payment1</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">process_recurring_payment</span><span class="p">(</span><span class="s2">&quot;CUST-001&quot;</span><span class="p">)</span>
+        <span class="n">payment2</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">process_recurring_payment</span><span class="p">(</span><span class="s2">&quot;CUST-001&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Cancel subscription</span>
+        <span class="n">manager</span><span class="o">.</span><span class="n">cancel_subscription</span><span class="p">(</span><span class="s2">&quot;CUST-001&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="best-practices-for-recurring-payments">
+<h2>Best Practices for Recurring Payments<a class="headerlink" href="#best-practices-for-recurring-payments" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Recurring Payment Best Practices</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">recurring_payment_best_practices</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Examples of best practices for recurring payments.&quot;&quot;&quot;</span>
+
+    <span class="c1"># 1. Always validate the initial payment before enabling recurring billing</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup_subscription_safely</span><span class="p">(</span><span class="n">customer_data</span><span class="p">,</span> <span class="n">plan_data</span><span class="p">):</span>
+        <span class="n">initial_payment</span> <span class="o">=</span> <span class="n">create_initial_payment</span><span class="p">()</span>
+
+        <span class="c1"># Only enable recurring if initial payment succeeds</span>
+        <span class="k">if</span> <span class="n">initial_payment</span> <span class="ow">and</span> <span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Initial payment approved - subscription activated&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Initial payment failed - subscription not activated&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># 2. Handle failed recurring payments gracefully</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">handle_failed_recurring_payment</span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span> <span class="n">payment_failure</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle failed recurring payment scenarios.&quot;&quot;&quot;</span>
+
+        <span class="n">failure_reason</span> <span class="o">=</span> <span class="n">payment_failure</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown error&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;insufficient funds&#39;</span> <span class="ow">in</span> <span class="n">failure_reason</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="c1"># Retry in a few days</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⏰ Scheduling retry for </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2"> due to insufficient funds&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="s1">&#39;expired card&#39;</span> <span class="ow">in</span> <span class="n">failure_reason</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="c1"># Request card update</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;💳 Requesting card update for </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="s1">&#39;card cancelled&#39;</span> <span class="ow">in</span> <span class="n">failure_reason</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="c1"># Suspend subscription</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⏸️ Suspending subscription for </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 3. Implement subscription lifecycle management</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">subscription_lifecycle_example</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Example of complete subscription lifecycle.&quot;&quot;&quot;</span>
+
+        <span class="n">stages</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;trial&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="s1">&#39;0.00&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Free trial period&#39;</span><span class="p">},</span>
+            <span class="s1">&#39;active&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="s1">&#39;29.99&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Active subscription&#39;</span><span class="p">},</span>
+            <span class="s1">&#39;past_due&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="s1">&#39;29.99&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Past due payment&#39;</span><span class="p">},</span>
+            <span class="s1">&#39;cancelled&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="s1">&#39;0.00&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Cancelled subscription&#39;</span><span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">stage</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">stages</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📋 </span><span class="si">{</span><span class="n">stage</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2"> stage: </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 4. Use meaningful descriptions and order IDs</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_descriptive_recurring_payment</span><span class="p">(</span><span class="n">parent_payment_id</span><span class="p">,</span> <span class="n">billing_period</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create recurring payment with descriptive information.&quot;&quot;&quot;</span>
+
+        <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+
+        <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_recurring_payment</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;29.99&quot;</span><span class="p">,</span>
+            <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Premium Plan - </span><span class="si">{</span><span class="n">billing_period</span><span class="si">}</span><span class="s2"> billing&quot;</span><span class="p">,</span>
+            <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+            <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;payment_id&quot;</span><span class="p">:</span> <span class="n">parent_payment_id</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">payment</span>
+</pre></div>
+</div>
+</section>
+<section id="common-recurring-payment-scenarios">
+<h2>Common Recurring Payment Scenarios<a class="headerlink" href="#common-recurring-payment-scenarios" title="Link to this heading"></a></h2>
+<p>Different types of recurring billing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">recurring_payment_scenarios</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Examples of different recurring payment scenarios.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Scenario 1: Fixed subscription (SaaS)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">saas_subscription</span><span class="p">():</span>
+        <span class="n">initial</span> <span class="o">=</span> <span class="n">create_initial_payment</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">initial</span> <span class="ow">and</span> <span class="n">initial</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+            <span class="c1"># Monthly SaaS billing</span>
+            <span class="n">monthly_payments</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">):</span>  <span class="c1"># 12 months</span>
+                <span class="n">payment</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span>
+                    <span class="n">initial</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                    <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;49.99&quot;</span><span class="p">,</span>
+                    <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;SaaS Premium - Month </span><span class="si">{</span><span class="n">month</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+                <span class="n">monthly_payments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">monthly_payments</span>
+
+    <span class="c1"># Scenario 2: Usage-based billing</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">usage_based_billing</span><span class="p">():</span>
+        <span class="n">initial</span> <span class="o">=</span> <span class="n">create_initial_payment</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">initial</span> <span class="ow">and</span> <span class="n">initial</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+            <span class="c1"># Variable usage billing</span>
+            <span class="n">usage_bills</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;25.99&quot;</span><span class="p">,</span> <span class="s2">&quot;usage&quot;</span><span class="p">:</span> <span class="s2">&quot;250 API calls&quot;</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;45.99&quot;</span><span class="p">,</span> <span class="s2">&quot;usage&quot;</span><span class="p">:</span> <span class="s2">&quot;750 API calls&quot;</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;89.99&quot;</span><span class="p">,</span> <span class="s2">&quot;usage&quot;</span><span class="p">:</span> <span class="s2">&quot;2000 API calls&quot;</span><span class="p">}</span>
+            <span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">bill</span> <span class="ow">in</span> <span class="n">usage_bills</span><span class="p">:</span>
+                <span class="n">payment</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span>
+                    <span class="n">initial</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                    <span class="n">amount</span><span class="o">=</span><span class="n">bill</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">],</span>
+                    <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;API Usage: </span><span class="si">{</span><span class="n">bill</span><span class="p">[</span><span class="s1">&#39;usage&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+
+    <span class="c1"># Scenario 3: Subscription with add-ons</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">subscription_with_addons</span><span class="p">():</span>
+        <span class="n">initial</span> <span class="o">=</span> <span class="n">create_initial_payment</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">initial</span> <span class="ow">and</span> <span class="n">initial</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+            <span class="c1"># Base subscription + add-ons</span>
+            <span class="n">base_payment</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span>
+                <span class="n">initial</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;29.99&quot;</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Base subscription&quot;</span>
+            <span class="p">)</span>
+
+            <span class="n">addon_payment</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span>
+                <span class="n">initial</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;9.99&quot;</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Premium features add-on&quot;</span>
+            <span class="p">)</span>
+
+            <span class="k">return</span> <span class="p">[</span><span class="n">base_payment</span><span class="p">,</span> <span class="n">addon_payment</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="testing-recurring-payments">
+<h2>Testing Recurring Payments<a class="headerlink" href="#testing-recurring-payments" title="Link to this heading"></a></h2>
+<p>Test your recurring payment implementation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_recurring_payments</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test suite for recurring payments.&quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🧪 Testing recurring payments...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Test 1: Basic recurring payment</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Testing basic recurring payment...&quot;</span><span class="p">)</span>
+    <span class="n">initial</span> <span class="o">=</span> <span class="n">create_initial_payment</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">initial</span> <span class="ow">and</span> <span class="n">initial</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+        <span class="n">recurring</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span><span class="n">initial</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="n">recurring</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">,</span> <span class="s2">&quot;Recurring payment should succeed&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ✅ Basic recurring payment test passed&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Test 2: Multiple recurring payments</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. Testing multiple recurring payments...&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">initial</span><span class="p">:</span>
+        <span class="n">payments</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">payment</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span>
+                <span class="n">initial</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;10.00&quot;</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Test payment </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="n">payments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span>
+
+        <span class="n">success_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">payments</span> <span class="k">if</span> <span class="n">p</span> <span class="ow">and</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ✅ </span><span class="si">{</span><span class="n">success_count</span><span class="si">}</span><span class="s2">/3 recurring payments succeeded&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Test 3: Invalid parent payment ID</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. Testing invalid parent payment ID...&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">invalid_payment</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span>
+            <span class="s2">&quot;invalid-payment-id&quot;</span><span class="p">,</span>
+            <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;10.00&quot;</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ❌ Should have failed with invalid payment ID&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">CardinityError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ✅ Correctly handled invalid payment ID&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="production-considerations">
+<h2>Production Considerations<a class="headerlink" href="#production-considerations" title="Link to this heading"></a></h2>
+<p>Important considerations for production use:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Production Considerations for Recurring Payments</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># 1. Database schema for subscriptions</span>
+<span class="n">SUBSCRIPTION_SCHEMA</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;customer_id&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;initial_payment_id&#39;</span><span class="p">:</span> <span class="s1">&#39;uuid&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;enum(active, cancelled, suspended, past_due)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;plan_name&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;plan_amount&#39;</span><span class="p">:</span> <span class="s1">&#39;decimal&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;billing_cycle&#39;</span><span class="p">:</span> <span class="s1">&#39;enum(monthly, quarterly, annually)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;next_billing_date&#39;</span><span class="p">:</span> <span class="s1">&#39;datetime&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="s1">&#39;datetime&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;updated_at&#39;</span><span class="p">:</span> <span class="s1">&#39;datetime&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;retry_count&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;last_payment_attempt&#39;</span><span class="p">:</span> <span class="s1">&#39;datetime&#39;</span>
+<span class="p">}</span>
+
+<span class="c1"># 2. Webhook handling for payment status updates</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">handle_payment_webhook</span><span class="p">(</span><span class="n">webhook_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle payment status updates via webhooks.&quot;&quot;&quot;</span>
+
+    <span class="n">payment_id</span> <span class="o">=</span> <span class="n">webhook_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;payment_id&#39;</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">webhook_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;declined&#39;</span><span class="p">:</span>
+        <span class="c1"># Handle failed recurring payment</span>
+        <span class="n">handle_failed_payment</span><span class="p">(</span><span class="n">payment_id</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+        <span class="c1"># Update subscription as paid</span>
+        <span class="n">update_subscription_status</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="s1">&#39;paid&#39;</span><span class="p">)</span>
+
+<span class="c1"># 3. Retry logic for failed payments</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">retry_failed_payment</span><span class="p">(</span><span class="n">subscription_id</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implement retry logic for failed recurring payments.&quot;&quot;&quot;</span>
+
+    <span class="n">subscription</span> <span class="o">=</span> <span class="n">get_subscription</span><span class="p">(</span><span class="n">subscription_id</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">subscription</span><span class="p">[</span><span class="s1">&#39;retry_count&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">max_retries</span><span class="p">:</span>
+        <span class="c1"># Attempt payment again</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span>
+            <span class="n">subscription</span><span class="p">[</span><span class="s1">&#39;initial_payment_id&#39;</span><span class="p">],</span>
+            <span class="n">amount</span><span class="o">=</span><span class="n">subscription</span><span class="p">[</span><span class="s1">&#39;plan_amount&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+            <span class="c1"># Reset retry count</span>
+            <span class="n">update_subscription</span><span class="p">(</span><span class="n">subscription_id</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;retry_count&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Increment retry count</span>
+            <span class="n">update_subscription</span><span class="p">(</span><span class="n">subscription_id</span><span class="p">,</span> <span class="p">{</span>
+                <span class="s1">&#39;retry_count&#39;</span><span class="p">:</span> <span class="n">subscription</span><span class="p">[</span><span class="s1">&#39;retry_count&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Suspend subscription after max retries</span>
+        <span class="n">update_subscription</span><span class="p">(</span><span class="n">subscription_id</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;suspended&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<p>After implementing recurring payments:</p>
+<ol class="arabic simple">
+<li><p><strong>Webhook Integration</strong>: Set up webhooks for real-time payment updates</p></li>
+<li><p><strong>Customer Portal</strong>: Build a portal for customers to manage subscriptions</p></li>
+<li><p><strong>Analytics</strong>: Track subscription metrics and churn rates</p></li>
+<li><p><strong>Dunning Management</strong>: Implement failed payment recovery workflows</p></li>
+<li><p><strong>Plan Management</strong>: Support plan upgrades, downgrades, and changes</p></li>
+</ol>
+</section>
+<section id="security-best-practices">
+<h2>Security Best Practices<a class="headerlink" href="#security-best-practices" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Never store raw card data</strong> - use Cardinity’s tokenization</p></li>
+<li><p><strong>Implement PCI compliance</strong> for handling payment data</p></li>
+<li><p><strong>Use HTTPS</strong> for all payment-related communications</p></li>
+<li><p><strong>Log payment attempts</strong> for audit trails (without sensitive data)</p></li>
+<li><p><strong>Implement rate limiting</strong> to prevent abuse</p></li>
+<li><p><strong>Validate all input data</strong> before processing payments</p></li>
+<li><p><strong>Use environment variables</strong> for API credentials</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="basic-payments.html" class="btn btn-neutral float-left" title="Basic Payment Processing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3ds-authentication.html" class="btn btn-neutral float-right" title="3D Secure Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Cardinity.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

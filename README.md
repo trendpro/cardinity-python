@@ -93,7 +93,6 @@ if payment['status'] == 'pending':
 - **[Authentication](https://cardinity-python.readthedocs.io/en/latest/authentication.html)** - OAuth setup and security
 - **[Examples](https://cardinity-python.readthedocs.io/en/latest/examples/)** - Complete code examples
 - **[API Reference](https://cardinity-python.readthedocs.io/en/latest/api.html)** - Full API documentation
-- **[Migration Guide](https://cardinity-python.readthedocs.io/en/latest/migration.html)** - Migrate from Node.js SDK
 
 ## 💡 Examples
 
@@ -154,7 +153,10 @@ recurring_payment = cardinity.create_recurring_payment(
     amount="29.99",
     currency="EUR", 
     description="Monthly subscription",
-    payment_id=initial_payment['id']
+    country="LT",
+    payment_instrument={
+        "payment_id": initial_payment['id']
+    }
 )
 ```
 
@@ -312,7 +314,7 @@ uv run sphinx-build docs docs/_build
 
 ### Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for:
+We welcome contributions! Please see our [Contributing Guide](https://github.com/trendpro/cardinity-python/blob/main/CONTRIBUTING.md) for:
 
 - Development setup instructions
 - Code style guidelines
@@ -325,14 +327,14 @@ For complete API documentation, see:
 
 - **[Online Documentation](https://cardinity-python.readthedocs.io/)**
 - **[API Reference](https://cardinity-python.readthedocs.io/en/latest/api.html)**
-- **[Cardinity API Docs](https://developers.cardinity.com/)**
+- **[Cardinity API Docs](https://developers.cardinity.com/api/v1/#introduction)**
 
 ## 🆘 Support
 
 - **Documentation**: [Read the Docs](https://cardinity-python.readthedocs.io/)
 - **Issues**: [GitHub Issues](https://github.com/trendpro/cardinity-python/issues)
 - **Support**: kyalo@trendpro.co.ke
-- **API Documentation**: [developers.cardinity.com](https://developers.cardinity.com/)
+- **API Documentation**: [developers.cardinity.com/api/v1/#introduction](https://developers.cardinity.com/api/v1/#introduction)
 
 ## 📄 License
 
@@ -350,7 +352,7 @@ We use [Semantic Versioning](https://semver.org/) for version management. For av
 ## 🙏 Acknowledgments
 
 - Built with ❤️ by [Kyalo Kitili](https://github.com/trendpro)
-- Inspired by the Node.js SDK
+- Inspired by the [Node.js SDK](https://github.com/cardinity/cardinity-nodejs)
 - Thanks to all contributors and users
 
 ---

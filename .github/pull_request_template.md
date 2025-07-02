@@ -71,7 +71,6 @@ Describe any manual testing you performed
 
 - [ ] My changes are backward compatible
 - [ ] If breaking changes are introduced, I have documented them clearly
-- [ ] I have considered migration paths for existing users
 
 ## Additional Notes
 

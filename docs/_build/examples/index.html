@@ -1,0 +1,651 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examples &mdash; Cardinity Python SDK v1.0.1</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f9c3a110" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic Payment Processing" href="basic-payments.html" />
+    <link rel="prev" title="Authentication" href="../authentication.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Cardinity Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#available-examples">Available Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="basic-payments.html">Basic Payment Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recurring-payments.html">Recurring Payments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3ds-authentication.html">3D Secure Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refunds-settlements.html">Refunds and Settlements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error-handling.html">Error Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced-features.html">Advanced Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#quick-reference">Quick Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-test-data">Common Test Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-your-environment">Setting Up Your Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-payment-example">Basic Payment Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recurring-payments-example">Recurring Payments Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#d-secure-authentication-example">3D Secure Authentication Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#refund-processing-example">Refund Processing Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#error-handling-example">Error Handling Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-examples">Running Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#integration-patterns">Integration Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#need-help">Need Help?</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cardinity Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Examples</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/trendpro/cardinity-python/blob/main/docs/examples/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h1>
+<p>This section provides comprehensive examples of using the Cardinity Python SDK. Each example includes complete, runnable code with detailed explanations of payment processing workflows.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All examples use placeholder credentials and test card numbers. Replace them with your actual credentials and real data for production use.</p>
+</div>
+<section id="available-examples">
+<h2>Available Examples<a class="headerlink" href="#available-examples" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic-payments.html">Basic Payment Processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic-payments.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-payments.html#simple-payment-example">Simple Payment Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-payments.html#payment-with-authorization-vs-purchase">Payment with Authorization vs Purchase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-payments.html#handling-payment-responses">Handling Payment Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-payments.html#payment-information-retrieval">Payment Information Retrieval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-payments.html#advanced-payment-options">Advanced Payment Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-payments.html#test-card-numbers">Test Card Numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-payments.html#complete-workflow-example">Complete Workflow Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-payments.html#common-issues-and-solutions">Common Issues and Solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-payments.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-payments.html#best-practices">Best Practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recurring-payments.html">Recurring Payments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recurring-payments.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurring-payments.html#how-recurring-payments-work">How Recurring Payments Work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurring-payments.html#basic-recurring-payment-setup">Basic Recurring Payment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurring-payments.html#subscription-workflow-example">Subscription Workflow Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurring-payments.html#variable-amount-recurring-payments">Variable Amount Recurring Payments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurring-payments.html#recurring-payment-error-handling">Recurring Payment Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurring-payments.html#subscription-management-class">Subscription Management Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurring-payments.html#best-practices-for-recurring-payments">Best Practices for Recurring Payments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurring-payments.html#common-recurring-payment-scenarios">Common Recurring Payment Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurring-payments.html#testing-recurring-payments">Testing Recurring Payments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurring-payments.html#production-considerations">Production Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurring-payments.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurring-payments.html#security-best-practices">Security Best Practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="3ds-authentication.html">3D Secure Authentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="3ds-authentication.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3ds-authentication.html#d-secure-workflow">3D Secure Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3ds-authentication.html#basic-3d-secure-example">Basic 3D Secure Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3ds-authentication.html#ds2-browser-information">3DS2 Browser Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3ds-authentication.html#handling-different-3ds-scenarios">Handling Different 3DS Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3ds-authentication.html#web-integration-example">Web Integration Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3ds-authentication.html#mobile-app-integration">Mobile App Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3ds-authentication.html#advanced-3ds-configuration">Advanced 3DS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3ds-authentication.html#error-handling-for-3ds">Error Handling for 3DS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3ds-authentication.html#testing-3ds-flows">Testing 3DS Flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3ds-authentication.html#best-practices-for-3ds">Best Practices for 3DS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3ds-authentication.html#production-considerations">Production Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3ds-authentication.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="refunds-settlements.html">Refunds and Settlements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="refunds-settlements.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refunds-settlements.html#basic-refund-processing">Basic Refund Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refunds-settlements.html#multiple-partial-refunds">Multiple Partial Refunds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refunds-settlements.html#refund-status-management">Refund Status Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refunds-settlements.html#e-commerce-refund-scenarios">E-commerce Refund Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refunds-settlements.html#settlement-operations">Settlement Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refunds-settlements.html#void-operations">Void Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refunds-settlements.html#advanced-refund-management">Advanced Refund Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refunds-settlements.html#error-handling-for-refunds">Error Handling for Refunds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refunds-settlements.html#testing-refund-operations">Testing Refund Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refunds-settlements.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refunds-settlements.html#production-considerations">Production Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="refunds-settlements.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="error-handling.html">Error Handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html#exception-types">Exception Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html#comprehensive-error-handling">Comprehensive Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html#payment-specific-error-handling">Payment-Specific Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html#circuit-breaker-pattern">Circuit Breaker Pattern</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html#error-logging-and-monitoring">Error Logging and Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html#graceful-degradation">Graceful Degradation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html#webhook-error-handling">Webhook Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html#testing-error-scenarios">Testing Error Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html#best-practices-summary">Best Practices Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html#production-error-monitoring">Production Error Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced-features.html">Advanced Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced-features.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-features.html#webhook-integration">Webhook Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-features.html#payment-links">Payment Links</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-features.html#batch-payment-processing">Batch Payment Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-features.html#advanced-authentication">Advanced Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-features.html#payment-analytics">Payment Analytics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-features.html#complex-payment-workflows">Complex Payment Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-features.html#advanced-security-features">Advanced Security Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-features.html#integration-testing">Integration Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-features.html#performance-optimization">Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-features.html#production-deployment">Production Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-features.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="quick-reference">
+<h2>Quick Reference<a class="headerlink" href="#quick-reference" title="Link to this heading"></a></h2>
+<section id="common-test-data">
+<h3>Common Test Data<a class="headerlink" href="#common-test-data" title="Link to this heading"></a></h3>
+<p>Use these test values when running examples:</p>
+<p><strong>Test Credentials (Placeholder):</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CONSUMER_KEY</span> <span class="o">=</span> <span class="s2">&quot;your_consumer_key_here&quot;</span>
+<span class="n">CONSUMER_SECRET</span> <span class="o">=</span> <span class="s2">&quot;your_consumer_secret_here&quot;</span>
+</pre></div>
+</div>
+<p><strong>Test Card Numbers:</strong></p>
+<ul class="simple">
+<li><p><strong>Visa Success</strong>: 4111111111111111</p></li>
+<li><p><strong>MasterCard Success</strong>: 5555555555554444</p></li>
+<li><p><strong>Visa 3DS Success</strong>: 4444333322221111</p></li>
+<li><p><strong>American Express Success</strong>: 378282246310005</p></li>
+<li><p><strong>Failure (any amount &gt;150)</strong>: Any valid card number</p></li>
+</ul>
+<p><strong>Test Amounts:</strong></p>
+<ul class="simple">
+<li><p><strong>Success</strong>: Any amount &lt; 150.00</p></li>
+<li><p><strong>Failure</strong>: Any amount &gt;= 150.00</p></li>
+<li><p><strong>3DS Required</strong>: Use description <code class="docutils literal notranslate"><span class="pre">3ds2-pass</span></code> or <code class="docutils literal notranslate"><span class="pre">3ds2-fail</span></code></p></li>
+</ul>
+</section>
+<section id="setting-up-your-environment">
+<h3>Setting Up Your Environment<a class="headerlink" href="#setting-up-your-environment" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p><strong>Install the SDK:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>cardinity-python
+</pre></div>
+</div>
+</li>
+<li><p><strong>Set up environment variables (recommended):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CARDINITY_CONSUMER_KEY</span><span class="o">=</span><span class="s2">&quot;your_consumer_key_here&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CARDINITY_CONSUMER_SECRET</span><span class="o">=</span><span class="s2">&quot;your_consumer_secret_here&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Basic client initialization:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span>
+
+<span class="n">cardinity</span> <span class="o">=</span> <span class="n">Cardinity</span><span class="p">(</span>
+    <span class="n">consumer_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_KEY&quot;</span><span class="p">),</span>
+    <span class="n">consumer_secret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_SECRET&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="basic-payment-example">
+<h2>Basic Payment Example<a class="headerlink" href="#basic-payment-example" title="Link to this heading"></a></h2>
+<p>Here’s a simple payment processing example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Basic Payment Example</span>
+
+<span class="sd">This example demonstrates how to create a simple payment using the Cardinity Python SDK.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span><span class="p">,</span> <span class="n">CardinityError</span>
+
+<span class="c1"># Initialize client with placeholder credentials</span>
+<span class="n">cardinity</span> <span class="o">=</span> <span class="n">Cardinity</span><span class="p">(</span>
+    <span class="n">consumer_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_KEY&quot;</span><span class="p">,</span> <span class="s2">&quot;your_consumer_key_here&quot;</span><span class="p">),</span>
+    <span class="n">consumer_secret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_SECRET&quot;</span><span class="p">,</span> <span class="s2">&quot;your_consumer_secret_here&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_basic_payment</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a basic payment with a test credit card.&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;10.00&quot;</span><span class="p">,</span>
+            <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Basic payment example&quot;</span><span class="p">,</span>
+            <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+            <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>  <span class="c1"># Test Visa card</span>
+                <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+                <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Payment created: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Status: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Amount: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;currency&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">payment</span>
+
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Payment failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="c1"># Create the payment</span>
+<span class="n">payment</span> <span class="o">=</span> <span class="n">create_basic_payment</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="recurring-payments-example">
+<h2>Recurring Payments Example<a class="headerlink" href="#recurring-payments-example" title="Link to this heading"></a></h2>
+<p>Subscription-style recurring payments:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Recurring Payment Example</span>
+
+<span class="sd">This example shows how to set up subscription-style payments.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_initial_payment</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the initial payment for recurring setup.&quot;&quot;&quot;</span>
+
+    <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+        <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;29.99&quot;</span><span class="p">,</span>
+        <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Monthly subscription - Initial payment&quot;</span><span class="p">,</span>
+        <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+        <span class="n">order_id</span><span class="o">=</span><span class="s2">&quot;SUBSCRIPTION-001-INITIAL&quot;</span><span class="p">,</span>
+        <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+            <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+            <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">payment</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_recurring_payment</span><span class="p">(</span><span class="n">parent_payment_id</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;29.99&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a recurring payment using parent payment.&quot;&quot;&quot;</span>
+
+    <span class="n">recurring_payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_recurring_payment</span><span class="p">(</span>
+        <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+        <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Monthly subscription payment&quot;</span><span class="p">,</span>
+        <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+        <span class="n">order_id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;SUBSCRIPTION-</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="c1"># Optional but recommended</span>
+        <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;payment_id&quot;</span><span class="p">:</span> <span class="n">parent_payment_id</span>  <span class="c1"># Reference to initial payment</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">recurring_payment</span>
+
+<span class="c1"># Example workflow</span>
+<span class="n">initial_payment</span> <span class="o">=</span> <span class="n">create_initial_payment</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+    <span class="c1"># Create subsequent recurring payments</span>
+    <span class="n">recurring_1</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span><span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+    <span class="n">recurring_2</span> <span class="o">=</span> <span class="n">create_recurring_payment</span><span class="p">(</span><span class="n">initial_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="d-secure-authentication-example">
+<h2>3D Secure Authentication Example<a class="headerlink" href="#d-secure-authentication-example" title="Link to this heading"></a></h2>
+<p>Handling 3D Secure v2 authentication:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">3D Secure Payment Example</span>
+
+<span class="sd">This example demonstrates 3D Secure v2 authentication workflow.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_3ds_payment</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a payment with 3D Secure authentication.&quot;&quot;&quot;</span>
+
+    <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+        <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;25.00&quot;</span><span class="p">,</span>
+        <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;3ds2-pass&quot;</span><span class="p">,</span>  <span class="c1"># Triggers 3DS flow in test environment</span>
+        <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+        <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+            <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+            <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;Test User&quot;</span>
+        <span class="p">},</span>
+        <span class="n">threeds2_data</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;notification_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://yoursite.com/3ds-callback&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;browser_info&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;accept_header&quot;</span><span class="p">:</span> <span class="s2">&quot;text/html&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;browser_language&quot;</span><span class="p">:</span> <span class="s2">&quot;en-US&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;screen_width&quot;</span><span class="p">:</span> <span class="mi">1920</span><span class="p">,</span>
+                <span class="s2">&quot;screen_height&quot;</span><span class="p">:</span> <span class="mi">1040</span><span class="p">,</span>
+                <span class="s2">&quot;challenge_window_size&quot;</span><span class="p">:</span> <span class="s2">&quot;500x600&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;user_agent&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:21.0)&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;color_depth&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+                <span class="s2">&quot;time_zone&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span>
+                <span class="s2">&quot;javascript_enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;java_enabled&quot;</span><span class="p">:</span> <span class="kc">False</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">payment</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">handle_3ds_flow</span><span class="p">(</span><span class="n">payment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle 3D Secure authentication flow.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pending&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔒 3DS authentication required&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;threeds2_data&#39;</span> <span class="ow">in</span> <span class="n">payment</span><span class="p">:</span>
+            <span class="n">acs_url</span> <span class="o">=</span> <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;threeds2_data&#39;</span><span class="p">][</span><span class="s1">&#39;acs_url&#39;</span><span class="p">]</span>
+            <span class="n">creq</span> <span class="o">=</span> <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;threeds2_data&#39;</span><span class="p">][</span><span class="s1">&#39;creq&#39;</span><span class="p">]</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Redirect customer to: </span><span class="si">{</span><span class="n">acs_url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After authentication, finalize the payment...&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Simulate successful authentication response</span>
+            <span class="n">finalized_payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">finalize_payment</span><span class="p">(</span>
+                <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                <span class="n">cres</span><span class="o">=</span><span class="s2">&quot;3ds2-pass&quot;</span>  <span class="c1"># Test environment response for 3DS v2</span>
+            <span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">finalized_payment</span>
+
+    <span class="k">return</span> <span class="n">payment</span>
+
+<span class="c1"># Example workflow</span>
+<span class="n">payment</span> <span class="o">=</span> <span class="n">create_3ds_payment</span><span class="p">()</span>
+<span class="n">final_payment</span> <span class="o">=</span> <span class="n">handle_3ds_flow</span><span class="p">(</span><span class="n">payment</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="refund-processing-example">
+<h2>Refund Processing Example<a class="headerlink" href="#refund-processing-example" title="Link to this heading"></a></h2>
+<p>Processing full and partial refunds:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Refund Example</span>
+
+<span class="sd">This example demonstrates refund processing workflows.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_full_refund</span><span class="p">(</span><span class="n">payment_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a full refund for a payment.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Get payment details first</span>
+    <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">get_payment</span><span class="p">(</span><span class="n">payment_id</span><span class="p">)</span>
+
+    <span class="n">refund</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_refund</span><span class="p">(</span>
+        <span class="n">payment_id</span><span class="o">=</span><span class="n">payment_id</span><span class="p">,</span>
+        <span class="n">amount</span><span class="o">=</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">],</span>  <span class="c1"># Full amount</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Full refund - Customer not satisfied&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">refund</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_partial_refund</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a partial refund.&quot;&quot;&quot;</span>
+
+    <span class="n">refund</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_refund</span><span class="p">(</span>
+        <span class="n">payment_id</span><span class="o">=</span><span class="n">payment_id</span><span class="p">,</span>
+        <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">description</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">refund</span>
+
+<span class="c1"># Example: Process multiple partial refunds</span>
+<span class="n">payment</span> <span class="o">=</span> <span class="n">create_basic_payment</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+    <span class="c1"># Partial refund for shipping</span>
+    <span class="n">shipping_refund</span> <span class="o">=</span> <span class="n">create_partial_refund</span><span class="p">(</span>
+        <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+        <span class="s2">&quot;5.00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Shipping refund&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Partial refund for product</span>
+    <span class="n">product_refund</span> <span class="o">=</span> <span class="n">create_partial_refund</span><span class="p">(</span>
+        <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+        <span class="s2">&quot;3.00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Product return&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="error-handling-example">
+<h2>Error Handling Example<a class="headerlink" href="#error-handling-example" title="Link to this heading"></a></h2>
+<p>Comprehensive error handling:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Error Handling Example</span>
+
+<span class="sd">This example shows proper error handling techniques.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span><span class="p">,</span> <span class="n">CardinityError</span><span class="p">,</span> <span class="n">ValidationError</span><span class="p">,</span> <span class="n">APIError</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_payment_with_error_handling</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create payment with comprehensive error handling.&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;10.00&quot;</span><span class="p">,</span>
+            <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Test payment&quot;</span><span class="p">,</span>
+            <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+            <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+                <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">payment</span>
+
+    <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Validation Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Check your payment data - some fields may be invalid.&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">APIError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ API Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The API request failed. Check your credentials.&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Cardinity Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A general SDK error occurred.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="running-examples">
+<h2>Running Examples<a class="headerlink" href="#running-examples" title="Link to this heading"></a></h2>
+<p>Each example follows this structure:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Example: Description</span>
+
+<span class="sd">This example demonstrates how to...</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span><span class="p">,</span> <span class="n">CardinityError</span>
+
+<span class="c1"># Configuration with placeholder credentials</span>
+<span class="n">cardinity</span> <span class="o">=</span> <span class="n">Cardinity</span><span class="p">(</span>
+    <span class="n">consumer_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_KEY&quot;</span><span class="p">,</span> <span class="s2">&quot;your_consumer_key_here&quot;</span><span class="p">),</span>
+    <span class="n">consumer_secret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_SECRET&quot;</span><span class="p">,</span> <span class="s2">&quot;your_consumer_secret_here&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Example code here</span>
+        <span class="k">pass</span>
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="integration-patterns">
+<h2>Integration Patterns<a class="headerlink" href="#integration-patterns" title="Link to this heading"></a></h2>
+<p>For real-world integration scenarios:</p>
+<ul class="simple">
+<li><p><strong>E-commerce Integration</strong>: Complete checkout flow with cart processing</p></li>
+<li><p><strong>Subscription Billing</strong>: Automated recurring payment management</p></li>
+<li><p><strong>Marketplace Payments</strong>: Multi-vendor payment scenarios</p></li>
+<li><p><strong>Mobile App Integration</strong>: API integration patterns for mobile apps</p></li>
+<li><p><strong>Webhook Handling</strong>: Processing payment notifications and status updates</p></li>
+</ul>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Environment Variables</strong>: Always use environment variables for credentials</p></li>
+<li><p><strong>Error Handling</strong>: Implement comprehensive error handling for all operations</p></li>
+<li><p><strong>Testing</strong>: Use test credentials and test cards during development</p></li>
+<li><p><strong>Security</strong>: Never log or expose sensitive payment data</p></li>
+<li><p><strong>Idempotency</strong>: Use unique order IDs to prevent duplicate payments</p></li>
+<li><p><strong>Monitoring</strong>: Implement proper logging and monitoring for production</p></li>
+</ol>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Start with <code class="docutils literal notranslate"><span class="pre">basic_payment.py</span></code> for simple payment processing</p></li>
+<li><p>Learn about 3D Secure with <code class="docutils literal notranslate"><span class="pre">3ds_payment.py</span></code></p></li>
+<li><p>Implement subscriptions using <code class="docutils literal notranslate"><span class="pre">recurring_payment.py</span></code></p></li>
+<li><p>Handle refunds with <code class="docutils literal notranslate"><span class="pre">refund_example.py</span></code></p></li>
+<li><p>Explore advanced features for complex scenarios</p></li>
+</ol>
+</section>
+<section id="need-help">
+<h2>Need Help?<a class="headerlink" href="#need-help" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Visit our <a class="reference external" href="https://github.com/trendpro/cardinity-python/issues">GitHub Issues</a></p></li>
+<li><p>Check the <a class="reference external" href="https://developers.cardinity.com/api/v1/#introduction">API Documentation</a></p></li>
+<li><p>Contact support at <a class="reference external" href="mailto:kyalo&#37;&#52;&#48;trendpro&#46;co&#46;ke">kyalo<span>&#64;</span>trendpro<span>&#46;</span>co<span>&#46;</span>ke</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../authentication.html" class="btn btn-neutral float-left" title="Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="basic-payments.html" class="btn btn-neutral float-right" title="Basic Payment Processing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Cardinity.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

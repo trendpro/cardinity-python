@@ -1,0 +1,408 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cardinity.models.payment_link &mdash; Cardinity Python SDK v1.0.1</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=f9c3a110" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Cardinity Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Cardinity Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cardinity.models.payment_link</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cardinity.models.payment_link</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Cardinity Payment Link Models</span>
+
+<span class="sd">This module contains models for payment link operations.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..validation.constraints</span><span class="w"> </span><span class="kn">import</span> <span class="n">Constraints</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">ReadOnlyModel</span>
+
+
+<div class="viewcode-block" id="PaymentLink">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.PaymentLink">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PaymentLink</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Model for creating payment link requests.</span>
+
+<span class="sd">    Payment links allow merchants to generate URLs that customers</span>
+<span class="sd">    can use to complete payments without direct integration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="PaymentLink.__init__">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.PaymentLink.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize PaymentLink model.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: Payment link data dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Handle expiration_date conversion to ISO format if needed</span>
+        <span class="k">if</span> <span class="s2">&quot;expiration_date&quot;</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;expiration_date&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;expiration_date&quot;</span><span class="p">],</span> <span class="n">datetime</span><span class="p">):</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;expiration_date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;expiration_date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;Z&quot;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PaymentLink.get_constraints">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.PaymentLink.get_constraints">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get validation constraints for payment link creation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Cerberus validation schema for payment link data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Constraints</span><span class="o">.</span><span class="n">create_payment_link_schema</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PaymentLink.get_endpoint">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.PaymentLink.get_endpoint">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the API endpoint for payment link creation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The payment links endpoint</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;/paymentLinks&quot;</span></div>
+
+
+<div class="viewcode-block" id="PaymentLink.get_method">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.PaymentLink.get_method">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the HTTP method for payment link creation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Always returns POST for payment link creation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;POST&quot;</span></div>
+
+
+<div class="viewcode-block" id="PaymentLink.get_amount">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.PaymentLink.get_amount">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the payment link amount.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Payment amount in decimal format (e.g., &quot;10.50&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s2">&quot;amount&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PaymentLink.get_currency">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.PaymentLink.get_currency">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_currency</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the payment link currency.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Three-letter ISO currency code (e.g., &quot;EUR&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s2">&quot;currency&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PaymentLink.get_country">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.PaymentLink.get_country">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_country</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the payment link country.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Two-letter ISO country code (e.g., &quot;LT&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s2">&quot;country&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PaymentLink.get_description">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.PaymentLink.get_description">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the payment link description.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Payment link description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PaymentLink.get_expiration_date">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.PaymentLink.get_expiration_date">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_expiration_date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the payment link expiration date.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[str]: Expiration date in ISO 8601 format or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s2">&quot;expiration_date&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PaymentLink.is_multiple_use">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.PaymentLink.is_multiple_use">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_multiple_use</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if payment link allows multiple uses.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if multiple use is allowed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s2">&quot;multiple_use&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="UpdatePaymentLink">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.UpdatePaymentLink">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">UpdatePaymentLink</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Model for updating existing payment links.</span>
+
+<span class="sd">    This model allows updating the expiration date and enabled status</span>
+<span class="sd">    of existing payment links.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="UpdatePaymentLink.__init__">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.UpdatePaymentLink.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">link_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize UpdatePaymentLink model.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            link_id: The ID of the payment link to update</span>
+<span class="sd">            data: Update data dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_link_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">link_id</span><span class="p">)</span>
+
+        <span class="c1"># Handle expiration_date conversion to ISO format if needed</span>
+        <span class="k">if</span> <span class="s2">&quot;expiration_date&quot;</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;expiration_date&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;expiration_date&quot;</span><span class="p">],</span> <span class="n">datetime</span><span class="p">):</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;expiration_date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;expiration_date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;Z&quot;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UpdatePaymentLink.get_constraints">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.UpdatePaymentLink.get_constraints">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get validation constraints for payment link updates.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Cerberus validation schema for payment link updates</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Constraints</span><span class="o">.</span><span class="n">update_payment_link_schema</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="UpdatePaymentLink.get_endpoint">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.UpdatePaymentLink.get_endpoint">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the API endpoint for payment link updates.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The payment link-specific endpoint</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;/paymentLinks/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_link_id</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+<div class="viewcode-block" id="UpdatePaymentLink.get_method">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.UpdatePaymentLink.get_method">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the HTTP method for payment link updates.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Always returns PATCH for payment link updates</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;PATCH&quot;</span></div>
+
+
+<div class="viewcode-block" id="UpdatePaymentLink.get_link_id">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.UpdatePaymentLink.get_link_id">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_link_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the payment link ID being updated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The payment link ID</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_link_id</span></div>
+
+
+<div class="viewcode-block" id="UpdatePaymentLink.get_expiration_date">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.UpdatePaymentLink.get_expiration_date">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_expiration_date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the updated expiration date.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[str]: Expiration date in ISO 8601 format or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s2">&quot;expiration_date&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UpdatePaymentLink.is_enabled">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.UpdatePaymentLink.is_enabled">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the enabled status.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[bool]: Enabled status or None if not set</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s2">&quot;enabled&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="GetPaymentLink">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.GetPaymentLink">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GetPaymentLink</span><span class="p">(</span><span class="n">ReadOnlyModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Model for retrieving payment link information.</span>
+
+<span class="sd">    This model retrieves information about a specific payment link.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GetPaymentLink.__init__">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.GetPaymentLink.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">link_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize GetPaymentLink model.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            link_id: The ID of the payment link to retrieve</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_link_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">link_id</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="GetPaymentLink.get_constraints">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.GetPaymentLink.get_constraints">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get validation constraints for payment link retrieval.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: Empty constraints for read-only operations</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{}</span></div>
+
+
+<div class="viewcode-block" id="GetPaymentLink.get_endpoint">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.GetPaymentLink.get_endpoint">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the API endpoint for payment link retrieval.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The payment link-specific endpoint</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;/paymentLinks/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_link_id</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+<div class="viewcode-block" id="GetPaymentLink.get_method">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.GetPaymentLink.get_method">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the HTTP method for payment link retrieval.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Always returns GET for payment link retrieval</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;GET&quot;</span></div>
+
+
+<div class="viewcode-block" id="GetPaymentLink.get_link_id">
+<a class="viewcode-back" href="../../../api.html#cardinity.models.payment_link.GetPaymentLink.get_link_id">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_link_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the payment link ID being retrieved.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The payment link ID</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_link_id</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Cardinity.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

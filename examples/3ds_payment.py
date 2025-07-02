@@ -88,7 +88,7 @@ def create_3ds_payment_attempt():
                 "notification_url": "https://example.com/notify",
                 "browser_info": {
                     "accept_header": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-                    "language": "en-US",
+                    "browser_language": "en-US",
                     "screen_height": 1080,
                     "screen_width": 1920,
                     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
@@ -97,7 +97,7 @@ def create_3ds_payment_attempt():
                     "time_zone": -120,
                     "color_depth": 24,
                 },
-                "challenge_window_size": "02",
+                "challenge_window_size": "500x600",
             },
             country="LT",
         )

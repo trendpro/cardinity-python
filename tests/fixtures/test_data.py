@@ -2,7 +2,7 @@
 Test data fixtures for Cardinity SDK testing.
 
 This module contains test data based on Cardinity's official testing guidelines.
-See: https://developers.cardinity.com/api/v1/?javascript#oauth-parameters
+See: https://developers.cardinity.com/api/v1/#oauth-parameters
 """
 
 from datetime import datetime, timedelta, timezone

@@ -103,7 +103,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Type hints and full MyPy compatibility
 - 171 unit tests with 92% coverage
 - Complete Sphinx documentation
-- Migration guide from Node.js SDK
 - Working examples for all operations
 
 ### Security

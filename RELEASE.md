@@ -369,7 +369,6 @@ docs/
 ├── examples/
 ├── index.rst        # Main documentation page
 ├── installation.rst
-├── migration.rst
 └── quickstart.rst
 ```
 

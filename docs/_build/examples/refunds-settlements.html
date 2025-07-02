@@ -1,0 +1,944 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Refunds and Settlements &mdash; Cardinity Python SDK v1.0.1</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f9c3a110" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Error Handling" href="error-handling.html" />
+    <link rel="prev" title="3D Secure Authentication" href="3ds-authentication.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Cardinity Python SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#available-examples">Available Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="basic-payments.html">Basic Payment Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recurring-payments.html">Recurring Payments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3ds-authentication.html">3D Secure Authentication</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Refunds and Settlements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basic-refund-processing">Basic Refund Processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multiple-partial-refunds">Multiple Partial Refunds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#refund-status-management">Refund Status Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#e-commerce-refund-scenarios">E-commerce Refund Scenarios</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#settlement-operations">Settlement Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#void-operations">Void Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-refund-management">Advanced Refund Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-handling-for-refunds">Error Handling for Refunds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-refund-operations">Testing Refund Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#best-practices">Best Practices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#production-considerations">Production Considerations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="error-handling.html">Error Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced-features.html">Advanced Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#quick-reference">Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#basic-payment-example">Basic Payment Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#recurring-payments-example">Recurring Payments Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#d-secure-authentication-example">3D Secure Authentication Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#refund-processing-example">Refund Processing Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#error-handling-example">Error Handling Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#running-examples">Running Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#integration-patterns">Integration Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#need-help">Need Help?</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cardinity Python SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Examples</a></li>
+      <li class="breadcrumb-item active">Refunds and Settlements</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/trendpro/cardinity-python/blob/main/docs/examples/refunds-settlements.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="refunds-and-settlements">
+<h1>Refunds and Settlements<a class="headerlink" href="#refunds-and-settlements" title="Link to this heading"></a></h1>
+<p>This section covers refund processing and settlement management with the Cardinity Python SDK, including full refunds, partial refunds, and settlement operations.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>Refund and settlement operations include:</p>
+<ol class="arabic simple">
+<li><p><strong>Full Refunds</strong>: Refund the entire payment amount</p></li>
+<li><p><strong>Partial Refunds</strong>: Refund a portion of the payment amount</p></li>
+<li><p><strong>Multiple Refunds</strong>: Process multiple partial refunds for one payment</p></li>
+<li><p><strong>Settlement Management</strong>: Handle authorization settlements</p></li>
+<li><p><strong>Void Operations</strong>: Cancel unsettled authorizations</p></li>
+</ol>
+</section>
+<section id="basic-refund-processing">
+<h2>Basic Refund Processing<a class="headerlink" href="#basic-refund-processing" title="Link to this heading"></a></h2>
+<p>Here’s how to process refunds:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Basic Refund Example</span>
+
+<span class="sd">This example demonstrates how to process refunds for payments.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cardinity</span><span class="p">,</span> <span class="n">CardinityError</span>
+
+<span class="c1"># Initialize client</span>
+<span class="n">cardinity</span> <span class="o">=</span> <span class="n">Cardinity</span><span class="p">(</span>
+    <span class="n">consumer_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_KEY&quot;</span><span class="p">,</span> <span class="s2">&quot;your_consumer_key_here&quot;</span><span class="p">),</span>
+    <span class="n">consumer_secret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CARDINITY_CONSUMER_SECRET&quot;</span><span class="p">,</span> <span class="s2">&quot;your_consumer_secret_here&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_test_payment</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a test payment for refund examples.&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;50.00&quot;</span><span class="p">,</span>
+            <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Test payment for refund&quot;</span><span class="p">,</span>
+            <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+            <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+                <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;Test Customer&quot;</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Test payment created: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Amount: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;currency&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Status: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">payment</span>
+
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Test payment failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_full_refund</span><span class="p">(</span><span class="n">payment_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a full refund for a payment.&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Get original payment details</span>
+        <span class="n">original_payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">get_payment</span><span class="p">(</span><span class="n">payment_id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">original_payment</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Could not retrieve original payment&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Create full refund</span>
+        <span class="n">refund</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_refund</span><span class="p">(</span>
+            <span class="n">payment_id</span><span class="o">=</span><span class="n">payment_id</span><span class="p">,</span>
+            <span class="n">amount</span><span class="o">=</span><span class="n">original_payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">],</span>  <span class="c1"># Full amount</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Full refund - Customer not satisfied&quot;</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Full refund created: </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Refund Amount: </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;currency&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Status: </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Original Payment: </span><span class="si">{</span><span class="n">payment_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">refund</span>
+
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Full refund failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_partial_refund</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a partial refund for a payment.&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">refund</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_refund</span><span class="p">(</span>
+            <span class="n">payment_id</span><span class="o">=</span><span class="n">payment_id</span><span class="p">,</span>
+            <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">description</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;Partial refund - </span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Partial refund created: </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Refund Amount: </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;currency&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Status: </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Description: </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">refund</span>
+
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Partial refund failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="multiple-partial-refunds">
+<h2>Multiple Partial Refunds<a class="headerlink" href="#multiple-partial-refunds" title="Link to this heading"></a></h2>
+<p>Handle multiple partial refunds for a single payment:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">process_multiple_refunds</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example of processing multiple partial refunds.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Create test payment</span>
+    <span class="n">payment</span> <span class="o">=</span> <span class="n">create_test_payment</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">payment</span> <span class="ow">or</span> <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Cannot process refunds - payment not approved&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">💰 Original payment: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> EUR&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processing multiple partial refunds...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Define refund scenarios</span>
+    <span class="n">refund_scenarios</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;15.00&quot;</span><span class="p">,</span> <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Shipping refund&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;10.00&quot;</span><span class="p">,</span> <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Product discount&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="s2">&quot;5.00&quot;</span><span class="p">,</span> <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Service fee refund&quot;</span><span class="p">}</span>
+    <span class="p">]</span>
+
+    <span class="n">total_refunded</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">successful_refunds</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">scenario</span> <span class="ow">in</span> <span class="n">refund_scenarios</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   🔄 Processing refund: </span><span class="si">{</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> EUR - </span><span class="si">{</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;reason&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">refund</span> <span class="o">=</span> <span class="n">create_partial_refund</span><span class="p">(</span>
+            <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+            <span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">],</span>
+            <span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;reason&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">refund</span> <span class="ow">and</span> <span class="n">refund</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+            <span class="n">successful_refunds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">refund</span><span class="p">)</span>
+            <span class="n">total_refunded</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      ✅ Refund successful&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      ❌ Refund failed&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📊 Refund Summary:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Original Amount: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> EUR&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Total Refunded: </span><span class="si">{</span><span class="n">total_refunded</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> EUR&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Remaining: </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">])</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">total_refunded</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> EUR&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Successful Refunds: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">successful_refunds</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">successful_refunds</span>
+</pre></div>
+</div>
+</section>
+<section id="refund-status-management">
+<h2>Refund Status Management<a class="headerlink" href="#refund-status-management" title="Link to this heading"></a></h2>
+<p>Handle different refund statuses:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">check_refund_status</span><span class="p">(</span><span class="n">refund_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check and handle refund status.&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">refund</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">get_refund</span><span class="p">(</span><span class="n">refund_id</span><span class="p">)</span>
+
+        <span class="n">status</span> <span class="o">=</span> <span class="n">refund</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Refund </span><span class="si">{</span><span class="n">refund_id</span><span class="si">}</span><span class="s2"> approved&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Amount: </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;currency&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Processed: </span><span class="si">{</span><span class="n">refund</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;created&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Unknown&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;pending&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⏳ Refund </span><span class="si">{</span><span class="n">refund_id</span><span class="si">}</span><span class="s2"> pending&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Refund is being processed by the bank&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;declined&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Refund </span><span class="si">{</span><span class="n">refund_id</span><span class="si">}</span><span class="s2"> declined&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;error&#39;</span> <span class="ow">in</span> <span class="n">refund</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Reason: </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️ Unknown refund status: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">refund</span>
+
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Failed to check refund status: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">monitor_refund_processing</span><span class="p">(</span><span class="n">refund_id</span><span class="p">,</span> <span class="n">max_checks</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Monitor refund processing until completion.&quot;&quot;&quot;</span>
+
+    <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_checks</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔍 Checking refund status (attempt </span><span class="si">{</span><span class="n">attempt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">max_checks</span><span class="si">}</span><span class="s2">)...&quot;</span><span class="p">)</span>
+
+        <span class="n">refund</span> <span class="o">=</span> <span class="n">check_refund_status</span><span class="p">(</span><span class="n">refund_id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">refund</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">refund</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;approved&#39;</span><span class="p">,</span> <span class="s1">&#39;declined&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Refund processing completed with status: </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">refund</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Still pending... checking again in </span><span class="si">{</span><span class="n">interval</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ Refund monitoring timed out&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="e-commerce-refund-scenarios">
+<h2>E-commerce Refund Scenarios<a class="headerlink" href="#e-commerce-refund-scenarios" title="Link to this heading"></a></h2>
+<p>Real-world e-commerce refund examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ECommerceRefundManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manage e-commerce refunds with business logic.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cardinity_client</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cardinity</span> <span class="o">=</span> <span class="n">cardinity_client</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_order_cancellation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">,</span> <span class="n">order_details</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process full refund for order cancellation.&quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🛒 Processing order cancellation for payment </span><span class="si">{</span><span class="n">payment_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check if order can be cancelled</span>
+        <span class="k">if</span> <span class="n">order_details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;shipped&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Cannot cancel shipped order&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Create full refund</span>
+        <span class="n">refund</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinity</span><span class="o">.</span><span class="n">create_refund</span><span class="p">(</span>
+            <span class="n">payment_id</span><span class="o">=</span><span class="n">payment_id</span><span class="p">,</span>
+            <span class="n">amount</span><span class="o">=</span><span class="n">order_details</span><span class="p">[</span><span class="s1">&#39;total_amount&#39;</span><span class="p">],</span>
+            <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Order cancellation - Order #</span><span class="si">{</span><span class="n">order_details</span><span class="p">[</span><span class="s1">&#39;order_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">refund</span> <span class="ow">and</span> <span class="n">refund</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Order cancellation refund processed: </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> EUR&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">refund</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Order cancellation refund failed&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_return_refund</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">,</span> <span class="n">returned_items</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process refund for returned items.&quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📦 Processing return refund for payment </span><span class="si">{</span><span class="n">payment_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">total_refund</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">refund_description_parts</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">returned_items</span><span class="p">:</span>
+            <span class="n">item_refund</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;quantity&#39;</span><span class="p">])</span>
+            <span class="n">total_refund</span> <span class="o">+=</span> <span class="n">item_refund</span>
+            <span class="n">refund_description_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> x</span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;quantity&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Return refund: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">refund_description_parts</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">refund</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinity</span><span class="o">.</span><span class="n">create_refund</span><span class="p">(</span>
+            <span class="n">payment_id</span><span class="o">=</span><span class="n">payment_id</span><span class="p">,</span>
+            <span class="n">amount</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">total_refund</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">description</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">refund</span> <span class="ow">and</span> <span class="n">refund</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Return refund processed: </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> EUR&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">refund</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Return refund failed&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_partial_service_refund</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">,</span> <span class="n">service_issue</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process partial refund for service issues.&quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔧 Processing service issue refund for payment </span><span class="si">{</span><span class="n">payment_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Calculate refund based on issue severity</span>
+        <span class="n">refund_percentages</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;minor&#39;</span><span class="p">:</span> <span class="mf">0.10</span><span class="p">,</span>    <span class="c1"># 10% refund</span>
+            <span class="s1">&#39;moderate&#39;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="c1"># 25% refund</span>
+            <span class="s1">&#39;major&#39;</span><span class="p">:</span> <span class="mf">0.50</span><span class="p">,</span>    <span class="c1"># 50% refund</span>
+            <span class="s1">&#39;critical&#39;</span><span class="p">:</span> <span class="mf">1.0</span>   <span class="c1"># Full refund</span>
+        <span class="p">}</span>
+
+        <span class="n">severity</span> <span class="o">=</span> <span class="n">service_issue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;severity&#39;</span><span class="p">,</span> <span class="s1">&#39;minor&#39;</span><span class="p">)</span>
+        <span class="n">original_amount</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">service_issue</span><span class="p">[</span><span class="s1">&#39;original_amount&#39;</span><span class="p">])</span>
+        <span class="n">refund_percentage</span> <span class="o">=</span> <span class="n">refund_percentages</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">severity</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
+        <span class="n">refund_amount</span> <span class="o">=</span> <span class="n">original_amount</span> <span class="o">*</span> <span class="n">refund_percentage</span>
+
+        <span class="n">refund</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinity</span><span class="o">.</span><span class="n">create_refund</span><span class="p">(</span>
+            <span class="n">payment_id</span><span class="o">=</span><span class="n">payment_id</span><span class="p">,</span>
+            <span class="n">amount</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">refund_amount</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Service issue refund (</span><span class="si">{</span><span class="n">severity</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">service_issue</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">refund</span> <span class="ow">and</span> <span class="n">refund</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Service issue refund processed: </span><span class="si">{</span><span class="n">refund</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> EUR (</span><span class="si">{</span><span class="n">severity</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">refund</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Service issue refund failed&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="settlement-operations">
+<h2>Settlement Operations<a class="headerlink" href="#settlement-operations" title="Link to this heading"></a></h2>
+<p>Handle authorization settlements:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_authorization_payment</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an authorization-only payment for settlement examples.&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_payment</span><span class="p">(</span>
+            <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;100.00&quot;</span><span class="p">,</span>
+            <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Authorization for settlement&quot;</span><span class="p">,</span>
+            <span class="n">country</span><span class="o">=</span><span class="s2">&quot;LT&quot;</span><span class="p">,</span>
+            <span class="n">settle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Authorization only, no immediate settlement</span>
+            <span class="n">payment_instrument</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;pan&quot;</span><span class="p">:</span> <span class="s2">&quot;4111111111111111&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;exp_month&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                <span class="s2">&quot;exp_year&quot;</span><span class="p">:</span> <span class="mi">2025</span><span class="p">,</span>
+                <span class="s2">&quot;cvc&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;holder&quot;</span><span class="p">:</span> <span class="s2">&quot;Auth Customer&quot;</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Authorization created: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Amount: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;currency&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Status: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ⚠️ Remember to settle within 7 days!&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">payment</span>
+
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Authorization failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">settle_authorization</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Settle an authorization payment.&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Get original authorization</span>
+        <span class="n">auth_payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">get_payment</span><span class="p">(</span><span class="n">payment_id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">auth_payment</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Could not retrieve authorization&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Use original amount if no amount specified</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">amount</span> <span class="o">=</span> <span class="n">auth_payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Settlement for authorization </span><span class="si">{</span><span class="n">payment_id</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Create settlement</span>
+        <span class="n">settlement</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_settlement</span><span class="p">(</span>
+            <span class="n">payment_id</span><span class="o">=</span><span class="n">payment_id</span><span class="p">,</span>
+            <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">description</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Settlement created: </span><span class="si">{</span><span class="n">settlement</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Settlement Amount: </span><span class="si">{</span><span class="n">settlement</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">settlement</span><span class="p">[</span><span class="s1">&#39;currency&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Status: </span><span class="si">{</span><span class="n">settlement</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Authorization: </span><span class="si">{</span><span class="n">payment_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">settlement</span>
+
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Settlement failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">partial_settlement_example</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example of partial settlement workflow.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Create authorization</span>
+    <span class="n">auth_payment</span> <span class="o">=</span> <span class="n">create_authorization_payment</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">auth_payment</span> <span class="ow">or</span> <span class="n">auth_payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Cannot proceed with settlement - authorization failed&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">💰 Processing partial settlements...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Partial settlement 1 - 60% of original amount</span>
+    <span class="n">settlement1</span> <span class="o">=</span> <span class="n">settle_authorization</span><span class="p">(</span>
+        <span class="n">auth_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+        <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;60.00&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Partial settlement - First shipment&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Partial settlement 2 - Remaining 40%</span>
+    <span class="n">settlement2</span> <span class="o">=</span> <span class="n">settle_authorization</span><span class="p">(</span>
+        <span class="n">auth_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+        <span class="n">amount</span><span class="o">=</span><span class="s2">&quot;40.00&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Partial settlement - Second shipment&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">settlement1</span> <span class="ow">and</span> <span class="n">settlement2</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ All partial settlements completed&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Settlement 1: </span><span class="si">{</span><span class="n">settlement1</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> EUR&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Settlement 2: </span><span class="si">{</span><span class="n">settlement2</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> EUR&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Total Settled: </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">settlement1</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">float</span><span class="p">(</span><span class="n">settlement2</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> EUR&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="void-operations">
+<h2>Void Operations<a class="headerlink" href="#void-operations" title="Link to this heading"></a></h2>
+<p>Cancel unsettled authorizations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">void_authorization</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Void an unsettled authorization.&quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Void authorization </span><span class="si">{</span><span class="n">payment_id</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">void</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_void</span><span class="p">(</span>
+            <span class="n">payment_id</span><span class="o">=</span><span class="n">payment_id</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">description</span>
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Authorization voided: </span><span class="si">{</span><span class="n">void</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Status: </span><span class="si">{</span><span class="n">void</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Voided Payment: </span><span class="si">{</span><span class="n">payment_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">void</span>
+
+    <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Void failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">authorization_lifecycle_example</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Complete authorization lifecycle example.&quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔄 Authorization Lifecycle Example&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Step 1: Create authorization</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Creating authorization...&quot;</span><span class="p">)</span>
+    <span class="n">auth_payment</span> <span class="o">=</span> <span class="n">create_authorization_payment</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">auth_payment</span> <span class="ow">or</span> <span class="n">auth_payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Authorization failed - cannot continue&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Step 2: Decision point - settle or void</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. Decision: Settle or Void?&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Simulate business logic decision</span>
+    <span class="n">should_settle</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># This would be based on your business logic</span>
+
+    <span class="k">if</span> <span class="n">should_settle</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   📋 Decision: Settle authorization&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Step 3a: Settle authorization</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. Settling authorization...&quot;</span><span class="p">)</span>
+        <span class="n">settlement</span> <span class="o">=</span> <span class="n">settle_authorization</span><span class="p">(</span>
+            <span class="n">auth_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Final settlement after order confirmation&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">settlement</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Authorization lifecycle completed with settlement&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Settlement failed&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   📋 Decision: Void authorization&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Step 3b: Void authorization</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. Voiding authorization...&quot;</span><span class="p">)</span>
+        <span class="n">void</span> <span class="o">=</span> <span class="n">void_authorization</span><span class="p">(</span>
+            <span class="n">auth_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Order cancelled - voiding authorization&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">void</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Authorization lifecycle completed with void&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Void failed&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="advanced-refund-management">
+<h2>Advanced Refund Management<a class="headerlink" href="#advanced-refund-management" title="Link to this heading"></a></h2>
+<p>Advanced refund scenarios with business logic:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AdvancedRefundManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Advanced refund management with business rules.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cardinity_client</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cardinity</span> <span class="o">=</span> <span class="n">cardinity_client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refund_policies</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;full_refund_days&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+            <span class="s1">&#39;partial_refund_days&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+            <span class="s1">&#39;no_refund_days&#39;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
+            <span class="s1">&#39;restocking_fee&#39;</span><span class="p">:</span> <span class="mf">0.15</span>  <span class="c1"># 15%</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_refund_eligibility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_date</span><span class="p">,</span> <span class="n">refund_request_date</span><span class="p">,</span> <span class="n">order_type</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate refund eligibility based on business rules.&quot;&quot;&quot;</span>
+
+        <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+        <span class="c1"># Parse dates</span>
+        <span class="n">payment_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">payment_date</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;+00:00&#39;</span><span class="p">))</span>
+        <span class="n">request_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">refund_request_date</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;+00:00&#39;</span><span class="p">))</span>
+
+        <span class="n">days_elapsed</span> <span class="o">=</span> <span class="p">(</span><span class="n">request_dt</span> <span class="o">-</span> <span class="n">payment_dt</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
+
+        <span class="c1"># Determine refund policy</span>
+        <span class="k">if</span> <span class="n">days_elapsed</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">refund_policies</span><span class="p">[</span><span class="s1">&#39;full_refund_days&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;eligible&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s1">&#39;refund_type&#39;</span><span class="p">:</span> <span class="s1">&#39;full&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;percentage&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+                <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Within </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">refund_policies</span><span class="p">[</span><span class="s1">&#39;full_refund_days&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> days&quot;</span>
+            <span class="p">}</span>
+        <span class="k">elif</span> <span class="n">days_elapsed</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">refund_policies</span><span class="p">[</span><span class="s1">&#39;partial_refund_days&#39;</span><span class="p">]:</span>
+            <span class="c1"># Apply partial refund with restocking fee</span>
+            <span class="n">percentage</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">refund_policies</span><span class="p">[</span><span class="s1">&#39;restocking_fee&#39;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;eligible&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s1">&#39;refund_type&#39;</span><span class="p">:</span> <span class="s1">&#39;partial&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;percentage&#39;</span><span class="p">:</span> <span class="n">percentage</span><span class="p">,</span>
+                <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Restocking fee applied (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">refund_policies</span><span class="p">[</span><span class="s1">&#39;restocking_fee&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s2">%)&quot;</span>
+            <span class="p">}</span>
+        <span class="k">elif</span> <span class="n">days_elapsed</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">refund_policies</span><span class="p">[</span><span class="s1">&#39;no_refund_days&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;eligible&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s1">&#39;refund_type&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;percentage&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Beyond </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">refund_policies</span><span class="p">[</span><span class="s1">&#39;partial_refund_days&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> day partial refund window&quot;</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;eligible&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s1">&#39;refund_type&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;percentage&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Beyond </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">refund_policies</span><span class="p">[</span><span class="s1">&#39;no_refund_days&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> day refund window&quot;</span>
+            <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_policy_based_refund</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">,</span> <span class="n">refund_request</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process refund based on business policies.&quot;&quot;&quot;</span>
+
+        <span class="c1"># Get original payment</span>
+        <span class="n">payment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinity</span><span class="o">.</span><span class="n">get_payment</span><span class="p">(</span><span class="n">payment_id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">payment</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Payment not found&#39;</span><span class="p">}</span>
+
+        <span class="c1"># Check eligibility</span>
+        <span class="n">eligibility</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_refund_eligibility</span><span class="p">(</span>
+            <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">],</span>
+            <span class="n">refund_request</span><span class="p">[</span><span class="s1">&#39;request_date&#39;</span><span class="p">],</span>
+            <span class="n">refund_request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;order_type&#39;</span><span class="p">,</span> <span class="s1">&#39;standard&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">eligibility</span><span class="p">[</span><span class="s1">&#39;eligible&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Refund not eligible&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="n">eligibility</span><span class="p">[</span><span class="s1">&#39;reason&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+
+        <span class="c1"># Calculate refund amount</span>
+        <span class="n">original_amount</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">])</span>
+        <span class="n">refund_amount</span> <span class="o">=</span> <span class="n">original_amount</span> <span class="o">*</span> <span class="n">eligibility</span><span class="p">[</span><span class="s1">&#39;percentage&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Create refund</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">refund</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinity</span><span class="o">.</span><span class="n">create_refund</span><span class="p">(</span>
+                <span class="n">payment_id</span><span class="o">=</span><span class="n">payment_id</span><span class="p">,</span>
+                <span class="n">amount</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">refund_amount</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Policy-based refund: </span><span class="si">{</span><span class="n">eligibility</span><span class="p">[</span><span class="s1">&#39;reason&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s1">&#39;refund&#39;</span><span class="p">:</span> <span class="n">refund</span><span class="p">,</span>
+                <span class="s1">&#39;eligibility&#39;</span><span class="p">:</span> <span class="n">eligibility</span><span class="p">,</span>
+                <span class="s1">&#39;refund_amount&#39;</span><span class="p">:</span> <span class="n">refund_amount</span><span class="p">,</span>
+                <span class="s1">&#39;original_amount&#39;</span><span class="p">:</span> <span class="n">original_amount</span>
+            <span class="p">}</span>
+
+        <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Cardinity error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="error-handling-for-refunds">
+<h2>Error Handling for Refunds<a class="headerlink" href="#error-handling-for-refunds" title="Link to this heading"></a></h2>
+<p>Comprehensive error handling for refund operations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cardinity</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValidationError</span><span class="p">,</span> <span class="n">APIError</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">robust_refund_processing</span><span class="p">(</span><span class="n">payment_id</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process refund with robust error handling.&quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_retries</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Validate refund eligibility first</span>
+            <span class="n">payment</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">get_payment</span><span class="p">(</span><span class="n">payment_id</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">payment</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Payment not found&#39;</span><span class="p">}</span>
+
+            <span class="k">if</span> <span class="n">payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Cannot refund payment with status: </span><span class="si">{</span><span class="n">payment</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">}</span>
+
+            <span class="c1"># Check refund amount doesn&#39;t exceed original</span>
+            <span class="k">if</span> <span class="nb">float</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">float</span><span class="p">(</span><span class="n">payment</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]):</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Refund amount exceeds original payment amount&#39;</span><span class="p">}</span>
+
+            <span class="c1"># Attempt refund</span>
+            <span class="n">refund</span> <span class="o">=</span> <span class="n">cardinity</span><span class="o">.</span><span class="n">create_refund</span><span class="p">(</span>
+                <span class="n">payment_id</span><span class="o">=</span><span class="n">payment_id</span><span class="p">,</span>
+                <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="n">description</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">refund</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">{</span>
+                    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="s1">&#39;refund&#39;</span><span class="p">:</span> <span class="n">refund</span><span class="p">,</span>
+                    <span class="s1">&#39;attempt&#39;</span><span class="p">:</span> <span class="n">attempt</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="p">}</span>
+            <span class="k">elif</span> <span class="n">refund</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;declined&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">{</span>
+                    <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Refund declined&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="n">refund</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown reason&#39;</span><span class="p">)</span>
+                <span class="p">}</span>
+
+        <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Validation error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">}</span>
+
+        <span class="k">except</span> <span class="n">APIError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">attempt</span> <span class="o">&lt;</span> <span class="n">max_retries</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️ API error on attempt </span><span class="si">{</span><span class="n">attempt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">, retrying...&quot;</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">attempt</span><span class="p">)</span>  <span class="c1"># Exponential backoff</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;API error after </span><span class="si">{</span><span class="n">max_retries</span><span class="si">}</span><span class="s1"> attempts: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">}</span>
+
+        <span class="k">except</span> <span class="n">CardinityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Cardinity error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Failed after </span><span class="si">{</span><span class="n">max_retries</span><span class="si">}</span><span class="s1"> attempts&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="testing-refund-operations">
+<h2>Testing Refund Operations<a class="headerlink" href="#testing-refund-operations" title="Link to this heading"></a></h2>
+<p>Test suite for refund functionality:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_refund_operations</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive test suite for refund operations.&quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🧪 Testing Refund Operations&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Test 1: Full refund</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Testing full refund...&quot;</span><span class="p">)</span>
+    <span class="n">test_payment</span> <span class="o">=</span> <span class="n">create_test_payment</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">test_payment</span> <span class="ow">and</span> <span class="n">test_payment</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+        <span class="n">full_refund</span> <span class="o">=</span> <span class="n">create_full_refund</span><span class="p">(</span><span class="n">test_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="n">full_refund</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">,</span> <span class="s2">&quot;Full refund should be approved&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ✅ Full refund test passed&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Test 2: Partial refund</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. Testing partial refund...&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">test_payment</span><span class="p">:</span>
+        <span class="n">partial_refund</span> <span class="o">=</span> <span class="n">create_partial_refund</span><span class="p">(</span>
+            <span class="n">test_payment</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+            <span class="s2">&quot;25.00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Partial refund test&quot;</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">partial_refund</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">,</span> <span class="s2">&quot;Partial refund should be approved&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ✅ Partial refund test passed&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Test 3: Multiple partial refunds</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. Testing multiple partial refunds...&quot;</span><span class="p">)</span>
+    <span class="n">test_payment2</span> <span class="o">=</span> <span class="n">create_test_payment</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">test_payment2</span> <span class="ow">and</span> <span class="n">test_payment2</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">:</span>
+        <span class="n">refunds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">refund_amounts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;10.00&quot;</span><span class="p">,</span> <span class="s2">&quot;15.00&quot;</span><span class="p">,</span> <span class="s2">&quot;20.00&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">amount</span> <span class="ow">in</span> <span class="n">refund_amounts</span><span class="p">:</span>
+            <span class="n">refund</span> <span class="o">=</span> <span class="n">create_partial_refund</span><span class="p">(</span>
+                <span class="n">test_payment2</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                <span class="n">amount</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;Multiple refund test - </span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="n">refunds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">refund</span><span class="p">)</span>
+
+        <span class="n">successful_refunds</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">refunds</span> <span class="k">if</span> <span class="n">r</span> <span class="ow">and</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;approved&#39;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ✅ </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">successful_refunds</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">refund_amounts</span><span class="p">)</span><span class="si">}</span><span class="s2"> refunds successful&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Test 4: Invalid refund scenarios</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">4. Testing invalid refund scenarios...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Test invalid payment ID</span>
+    <span class="n">invalid_refund</span> <span class="o">=</span> <span class="n">create_partial_refund</span><span class="p">(</span>
+        <span class="s2">&quot;invalid-payment-id&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;10.00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Invalid test&quot;</span>
+    <span class="p">)</span>
+    <span class="k">assert</span> <span class="n">invalid_refund</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Invalid payment ID should fail&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ✅ Invalid payment ID handled correctly&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Refund and Settlement Best Practices</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">refund_best_practices</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Examples of refund best practices.&quot;&quot;&quot;</span>
+
+    <span class="n">practices</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;practice&quot;</span><span class="p">:</span> <span class="s2">&quot;Validate refund eligibility&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;example&quot;</span><span class="p">:</span> <span class="s2">&quot;Check payment status, amount limits, and business rules&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;practice&quot;</span><span class="p">:</span> <span class="s2">&quot;Use descriptive refund descriptions&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;example&quot;</span><span class="p">:</span> <span class="s2">&quot;Include order ID, reason, and item details&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;practice&quot;</span><span class="p">:</span> <span class="s2">&quot;Track refund status&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;example&quot;</span><span class="p">:</span> <span class="s2">&quot;Monitor refund processing and notify customers&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;practice&quot;</span><span class="p">:</span> <span class="s2">&quot;Handle partial refunds carefully&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;example&quot;</span><span class="p">:</span> <span class="s2">&quot;Ensure total refunds don&#39;t exceed original amount&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;practice&quot;</span><span class="p">:</span> <span class="s2">&quot;Implement retry logic&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;example&quot;</span><span class="p">:</span> <span class="s2">&quot;Handle temporary API failures gracefully&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;practice&quot;</span><span class="p">:</span> <span class="s2">&quot;Maintain audit trails&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;example&quot;</span><span class="p">:</span> <span class="s2">&quot;Log all refund operations for compliance&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;practice&quot;</span><span class="p">:</span> <span class="s2">&quot;Set up proper authorization windows&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;example&quot;</span><span class="p">:</span> <span class="s2">&quot;Settle or void authorizations within 7 days&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">practice</span> <span class="ow">in</span> <span class="n">practices</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;• </span><span class="si">{</span><span class="n">practice</span><span class="p">[</span><span class="s1">&#39;practice&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">practice</span><span class="p">[</span><span class="s1">&#39;example&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="production-considerations">
+<h2>Production Considerations<a class="headerlink" href="#production-considerations" title="Link to this heading"></a></h2>
+<p>Important considerations for production use:</p>
+<ol class="arabic simple">
+<li><p><strong>Refund Policies</strong>: Implement clear refund policies and time limits</p></li>
+<li><p><strong>Amount Validation</strong>: Ensure refunds don’t exceed original payment amounts</p></li>
+<li><p><strong>Status Tracking</strong>: Monitor refund processing status and timing</p></li>
+<li><p><strong>Customer Communication</strong>: Notify customers of refund status changes</p></li>
+<li><p><strong>Audit Trails</strong>: Maintain detailed logs of all refund operations</p></li>
+<li><p><strong>Business Rules</strong>: Implement business-specific refund logic</p></li>
+<li><p><strong>Settlement Timing</strong>: Manage authorization settlement windows properly</p></li>
+<li><p><strong>Error Handling</strong>: Handle all possible error scenarios gracefully</p></li>
+</ol>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<p>After implementing refunds and settlements:</p>
+<ol class="arabic simple">
+<li><p><strong>Webhook Integration</strong>: Set up webhooks for refund status updates</p></li>
+<li><p><strong>Customer Portal</strong>: Allow customers to track refund status</p></li>
+<li><p><strong>Analytics</strong>: Monitor refund rates and patterns</p></li>
+<li><p><strong>Automation</strong>: Automate refund processing based on business rules</p></li>
+<li><p><strong>Compliance</strong>: Ensure refund processes meet regulatory requirements</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="3ds-authentication.html" class="btn btn-neutral float-left" title="3D Secure Authentication" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="error-handling.html" class="btn btn-neutral float-right" title="Error Handling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Cardinity.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
